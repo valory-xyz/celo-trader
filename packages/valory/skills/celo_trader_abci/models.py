@@ -52,8 +52,4 @@ class Params(BaseParams):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters object."""
 
-        self.manual_points_stream_id = self._ensure(
-            "manual_points_stream_id", kwargs, str
-        )
-
         super().__init__(*args, **kwargs)

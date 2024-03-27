@@ -12,7 +12,7 @@ fingerprint:
   dialogues.py: bafybeiakqfqcpg7yrxt4bsyernhy5p77tci4qhmgqqjqi3ttx7zk6sklca
   fsm_specification.yaml: bafybeibgqjlvtcqllvqbauh7dm3xaudj5o4onuccxapl5lxrooae273dmy
   handlers.py: bafybeifxz32ttiql5jvrroosgwycc6rgos4yhlz4offxug4khjk2327pv4
-  models.py: bafybeickzferetdro5oh6qwpuw2e7zrf73oqfxeg4rpibe6hxq7yrygmte
+  models.py: bafybeifb6wkwqlwwnjkizocbfujq23cbloc4sv77bhhq6flvcnyebl6ade
 fingerprint_ignore_patterns: []
 connections: []
 contracts: []
@@ -22,7 +22,9 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibzduasg5pahk2d2glc36wlopg54ybwcdmjqbzozt2lmkp4reqsdu
 - valory/reset_pause_abci:0.1.0:bafybeib3geaw3o35aigmb4dhplxrjlsef7hbdwrozu4akiunlgyiegshj4
 - valory/termination_abci:0.1.0:bafybeifnfuy3svz5oz6kwglu35q6jn7ai3riqplyypskb7za5ejyvjmfza
-- valory/celo_trader_abci:0.1.0:bafybeifufvihquscp2ci7zninpayepdutdf4gsncyku7ctvcdnllm5nt7e
+- valory/celo_trader_abci:0.1.0:bafybeiarpecs4ablu4u53jqvjzkxj2qxblc3gzxklntto7kixps34zeqse
+- valory/mech_interact_abci:0.1.0:bafybeigilca6rfqu4qw7yhz5lnhzgymj5cabtusx5hjndt7w7kulkn7cga
+- valory/transaction_settlement_abci:0.1.0:bafybeifhuemoavm6hf4vypg2sl7kng3iv4ipxgpk3itbh5hp73lworpuwq
 behaviours:
   main:
     args: {}
@@ -131,6 +133,8 @@ models:
       serious_slash_unit_amount: 8000000000000000
       multisend_batch_size: 50
       tx_timeout: 10.0
+      mech_contract_address: '0x77af31de935740567cf4ff1986d04b2c964a786a'
+      ipfs_address: https://gateway.autonolas.tech/ipfs/
     class_name: Params
   randomness_api:
     args:

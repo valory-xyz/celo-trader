@@ -34,12 +34,18 @@ from packages.valory.skills.celo_trader_abci.rounds import Event as CeloTraderEv
 from packages.valory.skills.celo_trader_chained_abci.composition import (
     CeloTraderChainedSkillAbciApp,
 )
+from packages.valory.skills.mech_interact_abci.models import (
+    Params as MechInteractAbciParams,
+)
 from packages.valory.skills.reset_pause_abci.rounds import Event as ResetPauseEvent
+from packages.valory.skills.termination_abci.models import TerminationParams
 
 
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool
 RandomnessApi = CeloTraderRandomnessApi
+
+MechInteractParams = MechInteractAbciParams
 
 MARGIN = 5
 MULTIPLIER = 10
@@ -69,5 +75,7 @@ class SharedState(BaseSharedState):
 
 class Params(
     CeloTraderParams,
+    MechInteractParams,
+    TerminationParams,
 ):
     """A model to represent params for multiple abci apps."""

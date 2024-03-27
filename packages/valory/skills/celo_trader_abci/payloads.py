@@ -28,10 +28,7 @@ from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
 class DecisionMakingPayload(BaseTxPayload):
     """Represent a transaction payload for the DecisionMakingRound."""
 
-    event: str
-    mech_requests: str
-    tx_hash: str
-    post_tx_event: str
+    content: str
 
 
 @dataclass(frozen=True)

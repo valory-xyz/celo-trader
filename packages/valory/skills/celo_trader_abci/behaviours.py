@@ -31,13 +31,15 @@ from packages.valory.skills.abstract_round_abci.behaviours import (
     BaseBehaviour,
 )
 from packages.valory.skills.celo_trader_abci.models import Params, SharedState
+from packages.valory.skills.celo_trader_abci.payloads import (
+    DecisionMakingPayload,
+    PostTxDecisionMakingPayload,
+)
 from packages.valory.skills.celo_trader_abci.rounds import (
     CeloTraderAbciApp,
-    DecisionMakingPayload,
     DecisionMakingRound,
     Event,
     MechMetadata,
-    PostTxDecisionMakingPayload,
     PostTxDecisionMakingRound,
     SynchronizedData,
 )
@@ -47,7 +49,7 @@ CELO_TOOL_NAME = ""
 MECH_PROMPT = ""
 
 
-class CeloSwapperBaseBehaviour(BaseBehaviour, ABC):
+class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
     """Base behaviour for the celo_swapper skill."""
 
     @property
@@ -66,7 +68,7 @@ class CeloSwapperBaseBehaviour(BaseBehaviour, ABC):
         return cast(SharedState, self.context.state)
 
 
-class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
+class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
     """DecisionMakingBehaviour"""
 
     matching_round: Type[AbstractRound] = DecisionMakingRound
@@ -75,8 +77,11 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
-            payload_data = self.get_payload()
-            payload = DecisionMakingPayload(**payload_data)
+            payload_data = self.get_payload_data()
+            payload = DecisionMakingPayload(
+                sender=self.context.agent_address,
+                content=json.dumps(payload_data, sort_keys=True),
+            )
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -84,13 +89,14 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
 
         self.set_done()
 
-    def get_payload(self) -> Dict:
+    def get_payload_data(self) -> Dict:
         """Get the payload"""
 
         # Default payload data which clears everything before resetting
         data = dict(
             event=Event.DONE.value,
             mech_requests="[]",
+            mech_responses="[]",
             tx_hash="",
             post_tx_event="",
         )
@@ -145,7 +151,7 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         return json.dumps(mech_requests)
 
     def process_mech_response(self) -> Optional[str]:
-        """Get the swap data from the mech response"""
+        """Get the call data from the mech response"""
         mech_responses = self.synchronized_data.mech_responses  # noqa: F841
 
         # TODO: this method should return None if the mech tool has decided not to trade
@@ -155,7 +161,7 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         return tx_hash
 
 
-class PostTxDecisionMakingBehaviour(CeloSwapperBaseBehaviour):
+class PostTxDecisionMakingBehaviour(CeloTraderBaseBehaviour):
     """PostTxDecisionMakingBehaviour"""
 
     matching_round: Type[AbstractRound] = PostTxDecisionMakingRound

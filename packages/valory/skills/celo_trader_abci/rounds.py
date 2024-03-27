@@ -126,13 +126,14 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Event]]:
         """Process the end of the block."""
         if self.threshold_reached:
-            event = Event(self.most_voted_payload.event)
+            payload = json.loads(self.most_voted_payload)
+            event = Event(payload["event"])
 
             updates = {
-                "mech_requests": self.most_voted_payload.mech_requests,
-                "mech_responses": self.most_voted_payload.mech_responses,
-                "most_voted_tx_hash": self.most_voted_payload.tx_hash,
-                "post_tx_event": self.most_voted_payload.post_tx_event,
+                "mech_requests": payload["mech_requests"],
+                "mech_responses": json.dumps(payload["mech_responses"], sort_keys=True),
+                "most_voted_tx_hash": payload["tx_hash"],
+                "post_tx_event": payload["post_tx_event"],
             }
 
             synchronized_data = self.synchronized_data.update(
