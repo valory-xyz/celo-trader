@@ -7,7 +7,7 @@ license: Apache-2.0
 fingerprint:
   README.md: bafybeibpx5bbmxyqhpxrm7l722ejprgv2xvmli65xvkstbonexlr5n3reu
 fingerprint_ignore_patterns: []
-agent: valory/celo_trader:0.1.0:bafybeibc7xlpy6jlqr2thos6dkr5jk3m4h6w7vgzresswt2lmobtyhhpwy
+agent: valory/celo_trader:0.1.0:bafybeidbm2qra3uurcf52744z762ims54kmpwpys4vidpfgokmxdces7eu
 number_of_agents: 1
 deployment:
   agent:
@@ -92,7 +92,7 @@ extra:
         max_points_per_period: ${MAX_POINTS_PER_PERIOD:int:5000}
         openai_call_window_size: ${OPENAI_CALL_WINDOW_SIZE:float:3600.0}
         openai_calls_allowed_in_window: ${OPENAI_CALLS_ALLOWED_IN_WINDOW:int:100}
-        service_endpoint_base: ${SERVICE_ENDPOINT_BASE:str:https://dummy_service.autonolas.tech/}
+        service_endpoint_base: ${SERVICE_ENDPOINT_BASE:str:https://celo_trader.autonolas.tech/}
         multisend_batch_size: ${MULTISEND_BATCH_SIZE:int:5}
         mech_contract_address: ${MECH_CONTRACT_ADDRESS:str:0x77af31de935740567cf4ff1986d04b2c964a786a}
         ipfs_address: ${IPFS_ADDRESS:str:https://gateway.autonolas.tech/ipfs/}

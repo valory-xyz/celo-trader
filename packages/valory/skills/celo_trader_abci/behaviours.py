@@ -45,8 +45,7 @@ from packages.valory.skills.celo_trader_abci.rounds import (
 )
 
 
-CELO_TOOL_NAME = ""
-MECH_PROMPT = ""
+CELO_TOOL_NAME = "TODO"
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
@@ -143,10 +142,15 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
                 MechMetadata(
                     nonce=str(uuid.uuid4()),
                     tool=CELO_TOOL_NAME,
-                    prompt=MECH_PROMPT,
+                    prompt=request,
                 )
             )
+            for request in self.local_state.user_requests
         ]
+
+        # Clear pending requests
+        # TODO: for multi-agent, this has to be done after this round
+        self.local_state.user_requests = []
 
         return json.dumps(mech_requests)
 

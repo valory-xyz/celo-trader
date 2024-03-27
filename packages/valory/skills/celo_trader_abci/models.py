@@ -19,7 +19,9 @@
 
 """This module contains the shared state for the abci skill of CeloTraderAbciApp."""
 
-from typing import Any
+from typing import Any, List
+
+from aea.skills.base import SkillContext
 
 from packages.valory.skills.abstract_round_abci.models import ApiSpecs, BaseParams
 from packages.valory.skills.abstract_round_abci.models import (
@@ -37,6 +39,11 @@ class SharedState(BaseSharedState):
 
     abci_app_cls = CeloTraderAbciApp
 
+    def __init__(self, *args: Any, skill_context: SkillContext, **kwargs: Any) -> None:
+        """Init"""
+        super().__init__(*args, skill_context=skill_context, **kwargs)
+        self.user_requests: List = []
+
 
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool
@@ -51,5 +58,5 @@ class Params(BaseParams):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters object."""
-
+        self.service_endpoint_base = self._ensure("service_endpoint_base", kwargs, str)
         super().__init__(*args, **kwargs)

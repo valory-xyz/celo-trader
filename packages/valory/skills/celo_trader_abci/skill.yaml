@@ -7,17 +7,19 @@ license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
   __init__.py: bafybeibpav2gjxb5zexmnc4roj3n52u3ua2nuusqhrctergnztbfcbpk7y
-  behaviours.py: bafybeickmfw6b5vkpq3rpn5rii6opp2xztxzs6hkwahymanat5gsqqa7he
+  behaviours.py: bafybeicwdtx6hrdpzqtie2nktvozz6ppzkr36ti55sgtlrb2ssgwkv77jq
   dialogues.py: bafybeif2gaejo5wyypbkstz5pgfhkutaazabubix6zraqp3oi3677a5ocq
   fsm_specification.yaml: bafybeibuved2gcvkmdb72gthyiruey7mtbc2bcnxdyhhhw4ofw7u5tgyuy
-  handlers.py: bafybeihwr26q3ecgblswiudfiafvqu6ff4wwfuuqm3w6kkc2nhkujvevom
-  models.py: bafybeic4jlinjyntbwp6iff2zc77vqshcliy5qxydgsy5qhdirk4enetdy
+  handlers.py: bafybeiekbrx6fjflsz73wdxb5atkodbdnhkxumenjxbpmirigggibmrd4a
+  models.py: bafybeig4lop272adhudz7isvgzookkvwqncqjii6iklcwgf7yhdzw5a5ou
   payloads.py: bafybeihqvfqhkxhcptgwaezvmyyza32wfgiqpirztr75wywttqr577kw6a
   rounds.py: bafybeiel4knhglkmagz2l2bwp2q275lcuwerr66t4hjplppsynr3bs32nq
 fingerprint_ignore_patterns: []
-connections: []
+connections:
+- valory/http_server:0.22.0:bafybeihpgu56ovmq4npazdbh6y6ru5i7zuv6wvdglpxavsckyih56smu7m
 contracts: []
-protocols: []
+protocols:
+- valory/http:1.0.0:bafybeifugzl63kfdmwrxwphrnrhj7bn6iruxieme3a4ntzejf6kmtuwmae
 skills:
 - valory/abstract_round_abci:0.1.0:bafybeic2emnylfmdtidobgdsxa4tgdelreeimtglqzrmic6cumhpsbfzhe
 behaviours:
@@ -119,6 +121,7 @@ models:
       tendermint_url: http://localhost:26657
       tx_timeout: 10.0
       validate_timeout: 1205
+      service_endpoint_base: https://celo_trader.staging.autonolas.tech/
     class_name: Params
   requests:
     args: {}
