@@ -1,9 +1,9 @@
 {
     "dev": {
-        "skill/valory/celo_trader_abci/0.1.0": "bafybeic6ppejl4ouaqxfqhfbua6ep4urahqydyqhqtocfhatd5g7nv23hu",
-        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeie4z62el46yydhafvmq6ait225zpjyrziqoza64yyysceif7d3j7e",
-        "agent/valory/celo_trader/0.1.0": "bafybeihc5wysmbhceiqvujgnkxdnk6rcmphlkkl5eah6f3b4dtenfpmbzy",
-        "service/valory/celo_trader/0.1.0": "bafybeidba5fezhvi6c4e3jb3bqnv2twm7ti2py5ahfaquizx5u7qdlxa3e"
+        "skill/valory/celo_trader_abci/0.1.0": "bafybeichmnapqgfkzzrpkfoxx4grxl5rdf27ogm27nngdpsg55rubl2oa4",
+        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeicpqvptfreaogfl6aqtber57lw5prkz2kvfooeaz4woc2uutzonmi",
+        "agent/valory/celo_trader/0.1.0": "bafybeif4ty3pv5l37efkeblrvuwhroub5wui5kbxylygu74jknqvubmnae",
+        "service/valory/celo_trader/0.1.0": "bafybeidwvfuleqx2lowqbzty5irooaiirrq4ilxogxmfyovghcgxyfw4sa"
     },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",

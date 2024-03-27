@@ -5,7 +5,7 @@ description: A service that trades on Celo.
 aea_version: '>=1.0.0, <2.0.0'
 license: Apache-2.0
 fingerprint:
-  README.md: bafybeidwy6xfsla7zxt5sj6hcp6qd4ya4tsjl77bs6b3gsrhqiiybkir5i
+  README.md: bafybeibpx5bbmxyqhpxrm7l722ejprgv2xvmli65xvkstbonexlr5n3reu
 fingerprint_ignore_patterns: []
 agent: valory/celo_trader_abci:0.1.0
 number_of_agents: 1

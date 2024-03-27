@@ -1,18 +1,18 @@
 name: celo_trader_chained_abci
-author: celo
+author: valory
 version: 0.1.0
 type: skill
 description: The chained abci for the celo_trader skill.
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
-  __init__.py: bafybeignlcsitiyh7szah2t3jbme7d5b7rv4unegw3mpnepdmi4ul7h4bq
-  behaviours.py: bafybeibv3ovkgkgmyibl6t7pi45o2luwtonp2eyzza2e25m4zbpt3iyny4
-  composition.py: bafybeibnznlbkwirktmbuip47ocg4bydboawfk2m3wfgk3sp6e2nidakku
+  __init__.py: bafybeibitph3yu4pwz76z5bkqikizx6om4vgep4tno2bwlxingvrrtrv5a
+  behaviours.py: bafybeihflzjkueqmudcyvirggd3ecrx7mq2vrdigy6olcmtpk3v7igg6mu
+  composition.py: bafybeibaglyz742xhlon3fiy7qq5egmqk52znkot4vrtt5qckvkra6eqqe
   dialogues.py: bafybeiakqfqcpg7yrxt4bsyernhy5p77tci4qhmgqqjqi3ttx7zk6sklca
-  fsm_specification.yaml: bafybeibfh25zomjjacmlllrfdjfofptdcrlproar267oexhz3jcx2z3a7y
-  handlers.py: bafybeicj2wcb2yiudlzn36d6wzu2hfw3bupswvvhparvms7syhajfu2rk4
-  models.py: bafybeicbrtbdbw7gy6xoex7s4agiy3ky56qgz3uodtwq4uwxxlthh4fkiy
+  fsm_specification.yaml: bafybeidozheptbqljvovswtyrz4c5db642r77qkdjzpvf7alccbz56aj4u
+  handlers.py: bafybeifxz32ttiql5jvrroosgwycc6rgos4yhlz4offxug4khjk2327pv4
+  models.py: bafybeickzferetdro5oh6qwpuw2e7zrf73oqfxeg4rpibe6hxq7yrygmte
 fingerprint_ignore_patterns: []
 connections: []
 contracts: []
@@ -22,7 +22,7 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibzduasg5pahk2d2glc36wlopg54ybwcdmjqbzozt2lmkp4reqsdu
 - valory/reset_pause_abci:0.1.0:bafybeib3geaw3o35aigmb4dhplxrjlsef7hbdwrozu4akiunlgyiegshj4
 - valory/termination_abci:0.1.0:bafybeifnfuy3svz5oz6kwglu35q6jn7ai3riqplyypskb7za5ejyvjmfza
-- valory/celo_trader_abci:0.1.0:bafybeic6ppejl4ouaqxfqhfbua6ep4urahqydyqhqtocfhatd5g7nv23hu
+- valory/celo_trader_abci:0.1.0:bafybeichmnapqgfkzzrpkfoxx4grxl5rdf27ogm27nngdpsg55rubl2oa4
 behaviours:
   main:
     args: {}

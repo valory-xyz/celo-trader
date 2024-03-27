@@ -145,6 +145,9 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
 
             return synchronized_data, event
 
+            # Static checker needs events to be mentioned:
+            # Event.DONE, Event.MECH, Event.SETTLE
+
         if not self.is_majority_possible(
             self.collection, self.synchronized_data.nb_participants
         ):
@@ -162,6 +165,9 @@ class PostTxDecisionMakingRound(CollectSameUntilThresholdRound):
         """Process the end of the block."""
         if self.threshold_reached:
             return self.synchronized_data, Event(self.most_voted_payload)
+
+            # Static checker needs events to be mentioned:
+            # Event.MECH, Event.DECISION_MAKING
 
         if not self.is_majority_possible(
             self.collection, self.synchronized_data.nb_participants
@@ -211,6 +217,7 @@ class CeloTraderAbciApp(AbciApp[Event]):
         FinishedDecisionMakingMechRound: {},
         FinishedDecisionMakingSettleRound: {},
         FinishedPostTxDecisionMakingMechRound: {},
+        FinishedDecisionMakingResetRound: {},
     }
     final_states: Set[AppState] = {
         FinishedDecisionMakingMechRound,

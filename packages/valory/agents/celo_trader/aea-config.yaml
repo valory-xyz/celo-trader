@@ -5,7 +5,7 @@ license: Apache-2.0
 description: An agent that trades on Celo.
 aea_version: '>=1.19.0, <2.0.0'
 fingerprint:
-  __init__.py: bafybeidm4dtgeja3y7gfn272d36o4t2zccbzck4cheqd5dzsqpwl2fl3ie
+  __init__.py: bafybeiax7uzltout7552wnctin5dz5o7qtxchvsqsz7wxme6yhug7wj3de
 fingerprint_ignore_patterns: []
 connections:
 - valory/ipfs:0.1.0:bafybeieogncafs6j6akrvsj6oi63iwhuunjyssmhz736vrl2sku4jc77za
@@ -34,8 +34,8 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeifhuemoavm6hf4vypg2sl7kng3iv4ipxgpk3itbh5hp73lworpuwq
 - valory/registration_abci:0.1.0:bafybeibzduasg5pahk2d2glc36wlopg54ybwcdmjqbzozt2lmkp4reqsdu
 - valory/reset_pause_abci:0.1.0:bafybeib3geaw3o35aigmb4dhplxrjlsef7hbdwrozu4akiunlgyiegshj4
-- valory/celo_trader_abci:0.1.0:bafybeic6ppejl4ouaqxfqhfbua6ep4urahqydyqhqtocfhatd5g7nv23hu
-- valory/celo_trader_chained_abci:0.1.0:bafybeie4z62el46yydhafvmq6ait225zpjyrziqoza64yyysceif7d3j7e
+- valory/celo_trader_abci:0.1.0:bafybeichmnapqgfkzzrpkfoxx4grxl5rdf27ogm27nngdpsg55rubl2oa4
+- valory/celo_trader_chained_abci:0.1.0:bafybeicpqvptfreaogfl6aqtber57lw5prkz2kvfooeaz4woc2uutzonmi
 default_ledger: ethereum
 required_ledgers:
 - ethereum
