@@ -1,0 +1,8 @@
+7a7db5e273b1625c49fb604d041dddaadb201ee1:packages/valory/skills/celo_trader/skill.yaml:generic-api-key:80
+c3a1dd916c949ead27cee125908ce8420a98eadd:packages/valory/skills/celo_trader_chained_abci/skill.yaml:generic-api-key:85
+c3a1dd916c949ead27cee125908ce8420a98eadd:packages/valory/services/celo_trader/service.yaml:generic-api-key:63
+c3a1dd916c949ead27cee125908ce8420a98eadd:packages/valory/agents/celo_trader/aea-config.yaml:generic-api-key:125
+fc816fee441834a6a8c212df59b1e249ea6dccb2:packages/valory/agents/celo_trader/aea-config.yaml:generic-api-key:121
+fc816fee441834a6a8c212df59b1e249ea6dccb2:packages/valory/services/celo_trader/service.yaml:generic-api-key:63
+fc816fee441834a6a8c212df59b1e249ea6dccb2:packages/valory/skills/celo_trader_abci/skill.yaml:generic-api-key:73
+fc816fee441834a6a8c212df59b1e249ea6dccb2:packages/valory/skills/celo_trader_chained_abci/skill.yaml:generic-api-key:76
