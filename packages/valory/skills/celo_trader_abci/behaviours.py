@@ -100,17 +100,9 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             post_tx_event="",
         )
 
-        # If there is both mech_response and tx_hash, it means we have already traded.
-        # We emit DONE and clean all data.
-        if (
-            self.synchronized_data.mech_responses
-            and self.synchronized_data.most_voted_tx_hash
-        ):
-            return data
-
-        # If there is no mech_response, it means we still need to interact with the Mech
-        # We transition into mech interact
-        if not self.synchronized_data.mech_responses:
+        # If there are user requests, we need to send mech requests
+        if self.local_state.user_requests:
+            self.context.logger.info("No pending user requests")
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
             data[
@@ -118,20 +110,25 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             ] = Event.MECH.value  # go back to mech response after settling
             return data
 
-        # We have a mech response at this point.
-        tx_hash = self.process_mech_response()
+        # If there are mech responses, we settle them
+        mech_responses = self.synchronized_data.mech_responses
+        if mech_responses:
+            tx_hash = self.process_next_mech_response()
+            mech_responses.pop(0)  # remove the processed response
+            data["mech_responses"] = json.dumps(mech_responses, sort_keys=True)
 
-        # If the mech tool has decided not to trade, we skip trading.
-        if not tx_hash:
-            return data
+            # If the mech tool has decided not to trade, we skip trading.
+            if not tx_hash:
+                return data
 
-        # We are settling a transaction
-        data["event"] = Event.SETTLE.value
-        data["tx_hash"] = tx_hash
-        data[
-            "post_tx_event"
-        ] = Event.DECISION_MAKING.value  # come back to this skill after settling
+            # We are settling a transaction
+            data["event"] = Event.SETTLE.value
+            data["tx_hash"] = tx_hash
+            data[
+                "post_tx_event"
+            ] = Event.DECISION_MAKING.value  # come back to this skill after settling
 
+        # Reset
         return data
 
     def get_mech_requests(self):
@@ -154,7 +151,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
 
         return json.dumps(mech_requests)
 
-    def process_mech_response(self) -> Optional[str]:
+    def process_next_mech_response(self) -> Optional[str]:
         """Get the call data from the mech response"""
         mech_responses = self.synchronized_data.mech_responses  # noqa: F841
 

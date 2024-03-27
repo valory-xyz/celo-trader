@@ -7,7 +7,7 @@ license: Apache-2.0
 fingerprint:
   README.md: bafybeibpx5bbmxyqhpxrm7l722ejprgv2xvmli65xvkstbonexlr5n3reu
 fingerprint_ignore_patterns: []
-agent: valory/celo_trader:0.1.0:bafybeidbm2qra3uurcf52744z762ims54kmpwpys4vidpfgokmxdces7eu
+agent: valory/celo_trader:0.1.0:bafybeig7ejj4kj4wd4v2wqxfc6oqf5tqi27ywtmyz3vkwpk73hz42t5g2a
 number_of_agents: 1
 deployment:
   agent:
