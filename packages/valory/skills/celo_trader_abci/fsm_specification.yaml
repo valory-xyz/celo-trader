@@ -1,46 +1,34 @@
 alphabet_in:
+- DECISION_MAKING
 - DONE
+- MECH
 - NO_MAJORITY
 - ROUND_TIMEOUT
-- MECH
-- SWAP
-- STRATEGY
-default_start_state: MarketDataCollectionRound
+- SETTLE
+default_start_state: DecisionMakingRound
 final_states:
-- FinishedMechRequestPreparationRound
-- FinishedSwapPreparationRound
-- FinishedDecisionMakingRound
+- FinishedDecisionMakingMechRound
+- FinishedDecisionMakingResetRound
+- FinishedDecisionMakingSettleRound
+- FinishedPostTxDecisionMakingMechRound
 label: CeloTraderAbciApp
 start_states:
-- MarketDataCollectionRound
 - DecisionMakingRound
 - PostTxDecisionMakingRound
 states:
-- MarketDataCollectionRound
 - DecisionMakingRound
-- FinishedDecisionMakingRound
-- MechRequestPreparationRound
-- FinishedMechRequestPreparationRound
-- SwapPreparationRound
-- FinishedSwapPreparationRound
+- FinishedDecisionMakingMechRound
+- FinishedDecisionMakingResetRound
+- FinishedDecisionMakingSettleRound
+- FinishedPostTxDecisionMakingMechRound
 - PostTxDecisionMakingRound
-- FinishedPostTxDecisionMakingRound
 transition_func:
-    (MarketDataCollectionRound, DONE): DecisionMakingRound
-    (MarketDataCollectionRound, NO_MAJORITY): MarketDataCollectionRound
-    (MarketDataCollectionRound, ROUND_TIMEOUT): MarketDataCollectionRound
-    (DecisionMakingRound, DONE): FinishedDecisionMakingRound
-    (DecisionMakingRound, MECH): MechRequestPreparationRound
-    (DecisionMakingRound, SWAP): SwapPreparationRound
+    (DecisionMakingRound, DONE): FinishedDecisionMakingResetRound
+    (DecisionMakingRound, MECH): FinishedDecisionMakingMechRound
     (DecisionMakingRound, NO_MAJORITY): DecisionMakingRound
     (DecisionMakingRound, ROUND_TIMEOUT): DecisionMakingRound
-    (MechRequestPreparationRound, DONE): FinishedMechRequestPreparationRound
-    (MechRequestPreparationRound, NO_MAJORITY): MechRequestPreparationRound
-    (MechRequestPreparationRound, ROUND_TIMEOUT): MechRequestPreparationRound
-    (SwapPreparationRound, DONE): FinishedSwapPreparationRound
-    (SwapPreparationRound, NO_MAJORITY): SwapPreparationRound
-    (SwapPreparationRound, ROUND_TIMEOUT): SwapPreparationRound
-    (PostTxDecisionMakingRound, MECH): FinishedPostTxDecisionMakingRound
-    (PostTxDecisionMakingRound, STRATEGY): DecisionMakingRound
+    (DecisionMakingRound, SETTLE): FinishedDecisionMakingSettleRound
+    (PostTxDecisionMakingRound, DECISION_MAKING): DecisionMakingRound
+    (PostTxDecisionMakingRound, MECH): FinishedPostTxDecisionMakingMechRound
     (PostTxDecisionMakingRound, NO_MAJORITY): PostTxDecisionMakingRound
     (PostTxDecisionMakingRound, ROUND_TIMEOUT): PostTxDecisionMakingRound

@@ -1,8 +1,8 @@
 {
     "dev": {
-        "skill/valory/celo_trader_abci/0.1.0": "bafybeichmnapqgfkzzrpkfoxx4grxl5rdf27ogm27nngdpsg55rubl2oa4",
-        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeicpqvptfreaogfl6aqtber57lw5prkz2kvfooeaz4woc2uutzonmi",
-        "agent/valory/celo_trader/0.1.0": "bafybeif4ty3pv5l37efkeblrvuwhroub5wui5kbxylygu74jknqvubmnae",
+        "skill/valory/celo_trader_abci/0.1.0": "bafybeidjjsjglno4ufmyjiajjek77wyxrf6gewmq7mjyxun2gvxrjvz5ry",
+        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeicf45igha5xixwribbmb5moskfjldysj3mp7nffxm26csw6kvjijq",
+        "agent/valory/celo_trader/0.1.0": "bafybeieq2ssq4nfcc2wuv2uxd5xlglyjfdw4fto7ca5eqdzu3kpgdqxh74",
         "service/valory/celo_trader/0.1.0": "bafybeidwvfuleqx2lowqbzty5irooaiirrq4ilxogxmfyovghcgxyfw4sa"
     },
     "third_party": {

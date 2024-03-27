@@ -6,14 +6,14 @@ description: A skill to trade on Celo.
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
-  __init__.py: bafybeie4ppnmpprdkrhv4mycvcxp3udqte5a46s2nhbwplxvmo3atem4cu
+  __init__.py: bafybeibpav2gjxb5zexmnc4roj3n52u3ua2nuusqhrctergnztbfcbpk7y
   behaviours.py: bafybeideeuims35saz5c3fmhjhamihkxb5ysxijmo225cpzeq6qeq2pi4e
   dialogues.py: bafybeif2gaejo5wyypbkstz5pgfhkutaazabubix6zraqp3oi3677a5ocq
-  fsm_specification.yaml: bafybeidsmahwxmchwukaryb4gpb77vfu5d57l4c44kjptc467n22qira4q
+  fsm_specification.yaml: bafybeibuved2gcvkmdb72gthyiruey7mtbc2bcnxdyhhhw4ofw7u5tgyuy
   handlers.py: bafybeihwr26q3ecgblswiudfiafvqu6ff4wwfuuqm3w6kkc2nhkujvevom
   models.py: bafybeifzakebe7btyg6ky7yvd3id2nlds2n3lslmbawjak3erh7dtnjrdq
   payloads.py: bafybeidokef7hlkrwvdta5nlv3pehqctkh2hrw6hquwjjhbeqx2fmx2exy
-  rounds.py: bafybeicxm6bka5h4z4tosdkoscbzumy4gbnll3dtbs7tmrr2t4wvr5zs5y
+  rounds.py: bafybeif4c7oonm7yxbzp5jwp73yck6a4gqgrjblkbeahs4c427k45xp5im
 fingerprint_ignore_patterns: []
 connections: []
 contracts: []

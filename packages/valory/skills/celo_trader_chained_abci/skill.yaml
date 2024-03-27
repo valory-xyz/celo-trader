@@ -10,7 +10,7 @@ fingerprint:
   behaviours.py: bafybeihflzjkueqmudcyvirggd3ecrx7mq2vrdigy6olcmtpk3v7igg6mu
   composition.py: bafybeibaglyz742xhlon3fiy7qq5egmqk52znkot4vrtt5qckvkra6eqqe
   dialogues.py: bafybeiakqfqcpg7yrxt4bsyernhy5p77tci4qhmgqqjqi3ttx7zk6sklca
-  fsm_specification.yaml: bafybeidozheptbqljvovswtyrz4c5db642r77qkdjzpvf7alccbz56aj4u
+  fsm_specification.yaml: bafybeibgqjlvtcqllvqbauh7dm3xaudj5o4onuccxapl5lxrooae273dmy
   handlers.py: bafybeifxz32ttiql5jvrroosgwycc6rgos4yhlz4offxug4khjk2327pv4
   models.py: bafybeickzferetdro5oh6qwpuw2e7zrf73oqfxeg4rpibe6hxq7yrygmte
 fingerprint_ignore_patterns: []
@@ -22,7 +22,7 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibzduasg5pahk2d2glc36wlopg54ybwcdmjqbzozt2lmkp4reqsdu
 - valory/reset_pause_abci:0.1.0:bafybeib3geaw3o35aigmb4dhplxrjlsef7hbdwrozu4akiunlgyiegshj4
 - valory/termination_abci:0.1.0:bafybeifnfuy3svz5oz6kwglu35q6jn7ai3riqplyypskb7za5ejyvjmfza
-- valory/celo_trader_abci:0.1.0:bafybeichmnapqgfkzzrpkfoxx4grxl5rdf27ogm27nngdpsg55rubl2oa4
+- valory/celo_trader_abci:0.1.0:bafybeidjjsjglno4ufmyjiajjek77wyxrf6gewmq7mjyxun2gvxrjvz5ry
 behaviours:
   main:
     args: {}
