@@ -146,7 +146,7 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
             return synchronized_data, event
 
             # Static checker needs events to be mentioned:
-            # Event.DONE, Event.MECH, Event.SETTLE
+            # Event.DONE, Event.MECH, Event.SETTLE, Event.ROUND_TIMEOUT
 
         if not self.is_majority_possible(
             self.collection, self.synchronized_data.nb_participants
@@ -167,7 +167,7 @@ class PostTxDecisionMakingRound(CollectSameUntilThresholdRound):
             return self.synchronized_data, Event(self.most_voted_payload)
 
             # Static checker needs events to be mentioned:
-            # Event.MECH, Event.DECISION_MAKING
+            # Event.MECH, Event.DECISION_MAKING, Event.ROUND_TIMEOUT
 
         if not self.is_majority_possible(
             self.collection, self.synchronized_data.nb_participants

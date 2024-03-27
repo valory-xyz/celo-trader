@@ -146,7 +146,7 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
 
     def process_mech_response(self) -> Optional[str]:
         """Get the swap data from the mech response"""
-        mech_responses = self.synchronized_data.mech_responses
+        mech_responses = self.synchronized_data.mech_responses  # noqa: F841
 
         # TODO: this method should return None if the mech tool has decided not to trade
         # or the tx_hash from that tool if it has decided to trade
