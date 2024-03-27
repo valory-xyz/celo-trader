@@ -23,8 +23,14 @@ import json
 import uuid
 from abc import ABC
 from dataclasses import asdict
-from typing import Optional, Generator, Set, Type, cast, Dict
-from packages.valory.skills.celo_trader_abci.models import Params
+from typing import Dict, Generator, Optional, Set, Type, cast
+
+from packages.valory.skills.abstract_round_abci.base import AbstractRound
+from packages.valory.skills.abstract_round_abci.behaviours import (
+    AbstractRoundBehaviour,
+    BaseBehaviour,
+)
+from packages.valory.skills.celo_trader_abci.models import Params, SharedState
 from packages.valory.skills.celo_trader_abci.rounds import (
     CeloTraderAbciApp,
     DecisionMakingPayload,
@@ -35,12 +41,6 @@ from packages.valory.skills.celo_trader_abci.rounds import (
     PostTxDecisionMakingRound,
     SynchronizedData,
 )
-from packages.valory.skills.abstract_round_abci.base import AbstractRound
-from packages.valory.skills.abstract_round_abci.behaviours import (
-    AbstractRoundBehaviour,
-    BaseBehaviour,
-)
-from packages.valory.skills.celo_trader_abci.models import Params, SharedState
 
 
 CELO_TOOL_NAME = ""
@@ -84,21 +84,23 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
 
         self.set_done()
 
-
     def get_payload(self) -> Dict:
         """Get the payload"""
 
         # Default payload data which clears everything before resetting
         data = dict(
-            event = Event.DONE.value,
-            mech_requests = "[]",
-            tx_hash = "",
-            post_tx_event = "",
+            event=Event.DONE.value,
+            mech_requests="[]",
+            tx_hash="",
+            post_tx_event="",
         )
 
         # If there is both mech_response and tx_hash, it means we have already traded.
         # We emit DONE and clean all data.
-        if self.synchronized_data.mech_responses and self.synchronized_data.most_voted_tx_hash:
+        if (
+            self.synchronized_data.mech_responses
+            and self.synchronized_data.most_voted_tx_hash
+        ):
             return data
 
         # If there is no mech_response, it means we still need to interact with the Mech
@@ -106,7 +108,9 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         if not self.synchronized_data.mech_responses:
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
-            data["post_tx_event"] = Event.MECH.value  # go back to mech response after settling
+            data[
+                "post_tx_event"
+            ] = Event.MECH.value  # go back to mech response after settling
             return data
 
         # We have a mech response at this point.
@@ -119,10 +123,11 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         # We are settling a transaction
         data["event"] = Event.SETTLE.value
         data["tx_hash"] = tx_hash
-        data["post_tx_event"] = Event.DECISION_MAKING.value  # come back to this skill after settling
+        data[
+            "post_tx_event"
+        ] = Event.DECISION_MAKING.value  # come back to this skill after settling
 
         return data
-
 
     def get_mech_requests(self):
         """Get mech requests"""
@@ -138,7 +143,6 @@ class DecisionMakingBehaviour(CeloSwapperBaseBehaviour):
         ]
 
         return json.dumps(mech_requests)
-
 
     def process_mech_response(self) -> Optional[str]:
         """Get the swap data from the mech response"""

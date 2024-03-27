@@ -24,12 +24,6 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple, cast
 
-from packages.valory.skills.celo_trader_abci.payloads import (
-    DecisionMakingPayload,
-    MechRequestPreparationPayload,
-    PostTxDecisionMakingPayload,
-    SwapPreparationPayload,
-)
 from packages.valory.skills.abstract_round_abci.base import (
     AbciApp,
     AbciAppTransitionFunction,
@@ -39,6 +33,10 @@ from packages.valory.skills.abstract_round_abci.base import (
     DegenerateRound,
     EventToTimeout,
     get_name,
+)
+from packages.valory.skills.celo_trader_abci.payloads import (
+    DecisionMakingPayload,
+    PostTxDecisionMakingPayload,
 )
 
 
@@ -218,7 +216,7 @@ class CeloTraderAbciApp(AbciApp[Event]):
         FinishedDecisionMakingMechRound,
         FinishedDecisionMakingSettleRound,
         FinishedPostTxDecisionMakingMechRound,
-        FinishedDecisionMakingResetRound
+        FinishedDecisionMakingResetRound,
     }
     event_to_timeout: EventToTimeout = {}
     cross_period_persisted_keys: FrozenSet[str] = frozenset()

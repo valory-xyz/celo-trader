@@ -19,9 +19,6 @@
 
 """This module contains the handlers for the skill of CeloTraderChainedAbciApp."""
 
-from packages.valory.skills.celo_trader_abci.handlers import (
-    HttpHandler as BaseHttpHandler,
-)
 from packages.valory.skills.abstract_round_abci.handlers import (
     ABCIRoundHandler as BaseABCIRoundHandler,
 )
@@ -39,6 +36,9 @@ from packages.valory.skills.abstract_round_abci.handlers import (
 )
 from packages.valory.skills.abstract_round_abci.handlers import (
     TendermintHandler as BaseTendermintHandler,
+)
+from packages.valory.skills.celo_trader_abci.handlers import (
+    HttpHandler as BaseHttpHandler,
 )
 
 

@@ -21,6 +21,7 @@
 
 from dataclasses import dataclass
 from typing import Optional
+
 from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
 
 
