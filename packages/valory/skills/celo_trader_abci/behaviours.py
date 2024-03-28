@@ -45,7 +45,6 @@ from packages.valory.skills.celo_trader_abci.rounds import (
 )
 
 
-CELO_TOOL_NAME = "TODO"
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
@@ -138,7 +137,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             asdict(
                 MechMetadata(
                     nonce=str(uuid.uuid4()),
-                    tool=CELO_TOOL_NAME,
+                    tool=self.params.celo_tool_name,
                     prompt=request,
                 )
             )

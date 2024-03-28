@@ -59,4 +59,5 @@ class Params(BaseParams):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters object."""
         self.service_endpoint_base = self._ensure("service_endpoint_base", kwargs, str)
+        self.celo_tool_name: str = self._ensure("tool", kwargs, str)
         super().__init__(*args, **kwargs)

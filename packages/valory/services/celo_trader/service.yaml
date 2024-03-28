@@ -101,6 +101,7 @@ extra:
         wveolas_address: ${WVEOLAS_ADDRESS:str:0x4039B809E0C0Ad04F6Fc880193366b251dDf4B40}
         tweet_consensus_wveolas: ${TWEET_CONSENSUS_WVEOLAS:int:2000000}
         termination_from_block: ${TERMINATION_FROM_BLOCK:int:0}
+        tool: ${TOOL:str:prepare_tx}
 ---
 public_id: valory/ledger:0.19.0
 type: connection

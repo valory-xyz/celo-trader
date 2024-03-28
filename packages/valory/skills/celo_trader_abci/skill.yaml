@@ -122,6 +122,7 @@ models:
       tx_timeout: 10.0
       validate_timeout: 1205
       service_endpoint_base: https://celo_trader.staging.autonolas.tech/
+      tool: insert_mech_tool_name
     class_name: Params
   requests:
     args: {}
