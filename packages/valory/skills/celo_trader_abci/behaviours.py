@@ -48,7 +48,7 @@ from packages.valory.skills.celo_trader_abci.rounds import (
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
-    """Base behaviour for the celo_swapper skill."""
+    """Base behaviour for the celo_trader_abci skill."""
 
     @property
     def synchronized_data(self) -> SynchronizedData:
