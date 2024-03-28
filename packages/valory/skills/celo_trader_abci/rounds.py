@@ -234,7 +234,9 @@ class CeloTraderAbciApp(AbciApp[Event]):
     }
     db_post_conditions: Dict[AppState, Set[str]] = {
         FinishedDecisionMakingMechRound: set(),
-        FinishedDecisionMakingSettleRound: {"most_voted_tx_hash"},
+        FinishedDecisionMakingSettleRound: {
+            get_name(SynchronizedData.most_voted_tx_hash)
+        },
         FinishedPostTxDecisionMakingMechRound: set(),
         FinishedDecisionMakingResetRound: set(),
     }
