@@ -100,8 +100,9 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         )
 
         # If there are user requests, we need to send mech requests
-        if self.local_state.user_requests:
-            self.context.logger.info("No pending user requests")
+        n_pending = len(self.local_state.user_requests)
+        if n_pending:
+            self.context.logger.info(f"{n_pending} pending user requests.")
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
             data[
