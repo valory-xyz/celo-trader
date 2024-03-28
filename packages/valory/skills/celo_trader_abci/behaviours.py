@@ -105,9 +105,8 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             self.context.logger.info(f"{n_pending} pending user requests.")
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
-            data[
-                "post_tx_event"
-            ] = Event.MECH.value  # go back to mech response after settling
+            # go back to mech response after settling
+            data["post_tx_event"] = Event.MECH.value
             return data
 
         # If there are mech responses, we settle them
@@ -124,9 +123,8 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             # We are settling a transaction
             data["event"] = Event.SETTLE.value
             data["tx_hash"] = tx_hash
-            data[
-                "post_tx_event"
-            ] = Event.DECISION_MAKING.value  # come back to this skill after settling
+            # come back to this skill after settling
+            data["post_tx_event"] = Event.DECISION_MAKING.value
 
         # Reset
         return data
