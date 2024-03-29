@@ -84,6 +84,7 @@ class HttpHandler(BaseHttpHandler):
     """This implements the echo handler."""
 
     SUPPORTED_PROTOCOL = HttpMessage.protocol_id
+    HANDLER_NAME = "Celo trader HttpHandler"
 
     def setup(self) -> None:
         """Implement the setup."""
@@ -136,7 +137,7 @@ class HttpHandler(BaseHttpHandler):
         # Check base url
         if not re.match(self.handler_url_regex, url):
             self.context.logger.info(
-                f"The url {url} does not match the DynamicNFT HttpHandler's pattern"
+                f"The url {url} does not match the {self.HANDLER_NAME}'s pattern"
             )
             return None, {}
 
@@ -153,7 +154,7 @@ class HttpHandler(BaseHttpHandler):
 
         # No route found
         self.context.logger.info(
-            f"The message [{method}] {url} is intended for the DynamicNFT HttpHandler but did not match any valid pattern"
+            f"The message [{method}] {url} is intended for the {self.HANDLER_NAME} but did not match any valid pattern"
         )
         return self._handle_bad_request, {}
 
