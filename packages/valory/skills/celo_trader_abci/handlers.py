@@ -203,7 +203,7 @@ class HttpHandler(BaseHttpHandler):
         handler(http_msg, http_dialogue, **kwargs)
 
     def _handle_bad_request(
-        self, http_msg: HttpMessage, http_dialogue: HttpDialogue
+        self, http_msg: HttpMessage, http_dialogue: HttpDialogue, msg: str = ""
     ) -> None:
         """
         Handle a Http bad request.
@@ -218,7 +218,7 @@ class HttpHandler(BaseHttpHandler):
             status_code=BAD_REQUEST_CODE,
             status_text="Bad request",
             headers=http_msg.headers,
-            body=b"",
+            body=msg.encode(),
         )
 
         # Send response
@@ -297,7 +297,12 @@ class HttpHandler(BaseHttpHandler):
     def _handle_post_request(
         self, http_msg: HttpMessage, http_dialogue: HttpDialogue
     ) -> None:
-        request = json.loads(http_msg.body)
+        try:
+            request = json.loads(http_msg.body)
+        except json.decoder.JSONDecodeError:
+            msg = f"Received invalid JSON request: {http_msg.body}."
+            return self._handle_bad_request(http_msg, http_dialogue, msg)
+
         self.context.logger.info(f"Received user request: {request}")
         self.context.state.user_requests.append(request)
         response_body_data = {}
