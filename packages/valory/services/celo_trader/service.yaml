@@ -7,7 +7,7 @@ license: Apache-2.0
 fingerprint:
   README.md: bafybeibpx5bbmxyqhpxrm7l722ejprgv2xvmli65xvkstbonexlr5n3reu
 fingerprint_ignore_patterns: []
-agent: valory/celo_trader:0.1.0:bafybeig7ejj4kj4wd4v2wqxfc6oqf5tqi27ywtmyz3vkwpk73hz42t5g2a
+agent: valory/celo_trader:0.1.0:bafybeibrbmjxx5bistfn3tfxntow6t3bjymeff2ytywb7hguwdyx242mri
 number_of_agents: 1
 deployment:
   agent:
@@ -101,6 +101,7 @@ extra:
         wveolas_address: ${WVEOLAS_ADDRESS:str:0x4039B809E0C0Ad04F6Fc880193366b251dDf4B40}
         tweet_consensus_wveolas: ${TWEET_CONSENSUS_WVEOLAS:int:2000000}
         termination_from_block: ${TERMINATION_FROM_BLOCK:int:0}
+        tool: ${TOOL:str:prepare_tx}
 ---
 public_id: valory/ledger:0.19.0
 type: connection

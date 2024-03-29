@@ -23,8 +23,10 @@ import json
 import uuid
 from abc import ABC
 from dataclasses import asdict
-from typing import Dict, Generator, Optional, Set, Type, cast
+from typing import Any, Dict, Generator, List, Optional, Set, Type, cast
 
+from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
+from packages.valory.protocols.contract_api import ContractApiMessage
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
 from packages.valory.skills.abstract_round_abci.behaviours import (
     AbstractRoundBehaviour,
@@ -39,17 +41,32 @@ from packages.valory.skills.celo_trader_abci.rounds import (
     CeloTraderAbciApp,
     DecisionMakingRound,
     Event,
-    MechMetadata,
     PostTxDecisionMakingRound,
     SynchronizedData,
 )
+from packages.valory.skills.mech_interact_abci.states.base import (
+    MechInteractionResponse,
+    MechMetadata,
+)
+from packages.valory.skills.transaction_settlement_abci.payload_tools import (
+    hash_payload_to_hex,
+)
+from packages.valory.skills.transaction_settlement_abci.rounds import TX_HASH_LENGTH
 
 
-CELO_TOOL_NAME = "TODO"
+# setting the safe gas to 0 means that all available gas will be used
+# which is what we want in most cases
+# more info here: https://safe-docs.dev.gnosisdev.com/safe/docs/contracts_tx_execution/
+SAFE_GAS = 0
+VALUE_KEY = "value"
+TO_ADDRESS_KEY = "value"
+EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
+# the current POC only supports transfer transactions, therefore, the transaction data will always be empty
+TX_DATA = b"0x"
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
-    """Base behaviour for the celo_swapper skill."""
+    """Base behaviour for the celo_trader_abci skill."""
 
     @property
     def synchronized_data(self) -> SynchronizedData:
@@ -94,28 +111,28 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # Default payload data which clears everything before resetting
         data = dict(
             event=Event.DONE.value,
-            mech_requests="[]",
-            mech_responses="[]",
+            mech_requests=[],
+            mech_responses=[],
             tx_hash="",
             post_tx_event="",
         )
 
         # If there are user requests, we need to send mech requests
-        if self.local_state.user_requests:
-            self.context.logger.info("No pending user requests")
+        n_pending = len(self.local_state.user_requests)
+        if n_pending:
+            self.context.logger.info(f"{n_pending} pending user request(s).")
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
-            data[
-                "post_tx_event"
-            ] = Event.MECH.value  # go back to mech response after settling
+            # go back to mech response after settling
+            data["post_tx_event"] = Event.MECH.value
             return data
 
         # If there are mech responses, we settle them
         mech_responses = self.synchronized_data.mech_responses
         if mech_responses:
-            tx_hash = self.process_next_mech_response()
-            mech_responses.pop(0)  # remove the processed response
-            data["mech_responses"] = json.dumps(mech_responses, sort_keys=True)
+            mech_response = mech_responses.pop(0)  # remove the response to be processed
+            tx_hash = self.process_next_mech_response(mech_response)
+            data["mech_responses"] = [asdict(response) for response in mech_responses]
 
             # If the mech tool has decided not to trade, we skip trading.
             if not tx_hash:
@@ -124,21 +141,20 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             # We are settling a transaction
             data["event"] = Event.SETTLE.value
             data["tx_hash"] = tx_hash
-            data[
-                "post_tx_event"
-            ] = Event.DECISION_MAKING.value  # come back to this skill after settling
+            # come back to this skill after settling
+            data["post_tx_event"] = Event.DECISION_MAKING.value
 
         # Reset
         return data
 
-    def get_mech_requests(self):
+    def get_mech_requests(self) -> List[Dict[str, str]]:
         """Get mech requests"""
 
         mech_requests = [
             asdict(
                 MechMetadata(
                     nonce=str(uuid.uuid4()),
-                    tool=CELO_TOOL_NAME,
+                    tool=self.params.celo_tool_name,
                     prompt=request,
                 )
             )
@@ -149,15 +165,75 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # TODO: for multi-agent, this has to be done after this round
         self.local_state.user_requests = []
 
-        return json.dumps(mech_requests)
+        return mech_requests
 
-    def process_next_mech_response(self) -> Optional[str]:
-        """Get the call data from the mech response"""
-        mech_responses = self.synchronized_data.mech_responses  # noqa: F841
+    def _build_safe_tx_hash(self, **kwargs: Any) -> Optional[str]:
+        """Prepares and returns the safe tx hash for a multisend tx."""
+        response_msg = yield from self.get_contract_api_response(
+            performative=ContractApiMessage.Performative.GET_STATE,  # type: ignore
+            contract_address=self.synchronized_data.safe_contract_address,
+            contract_id=str(GnosisSafeContract.contract_id),
+            contract_callable="get_raw_safe_transaction_hash",
+            data=TX_DATA,
+            safe_tx_gas=SAFE_GAS,
+            **kwargs,
+        )
 
-        # TODO: this method should return None if the mech tool has decided not to trade
-        # or the tx_hash from that tool if it has decided to trade
-        tx_hash = None
+        if response_msg.performative != ContractApiMessage.Performative.STATE:
+            self.context.logger.error(
+                "Couldn't get safe tx hash. Expected response performative "
+                f"{ContractApiMessage.Performative.STATE.value!r}, "  # type: ignore
+                f"received {response_msg.performative.value!r}: {response_msg}."
+            )
+            return None
+
+        tx_hash = response_msg.state.body.get("tx_hash", None)
+        if tx_hash is None or len(tx_hash) != TX_HASH_LENGTH:
+            self.context.logger.error(
+                "Something went wrong while trying to get the buy transaction's hash. "
+                f"Invalid hash {tx_hash!r} was returned."
+            )
+            return None
+
+        # strip "0x" from the response hash
+        return tx_hash[2:]
+
+    def process_next_mech_response(
+        self, mech_response: MechInteractionResponse
+    ) -> Optional[str]:
+        """Get the call data from the mech response."""
+
+        encoded_response = mech_response.result
+        if encoded_response is None:
+            self.context.logger.error(
+                f"No result was returned for mech with request id {mech_response.requestId!r}."
+            )
+            return None
+
+        try:
+            call_data = json.loads(encoded_response)
+        except json.decoder.JSONDecodeError:
+            self.context.logger.error(
+                f"Could not decode the mech's {encoded_response=}."
+            )
+            return None
+
+        mismatch = EXPECTED_CALL_DATA != frozenset(call_data.keys())
+        if mismatch:
+            self.context.logger.error(
+                "Incorrect call data were detected in the given mech response. "
+                f"Expected {EXPECTED_CALL_DATA} to be present. Received {call_data=}."
+            )
+            return None
+
+        safe_tx_hash = self._build_safe_tx_hash(**call_data)
+        tx_hash = hash_payload_to_hex(
+            safe_tx_hash,
+            call_data[VALUE_KEY],
+            SAFE_GAS,
+            call_data[TO_ADDRESS_KEY],
+            TX_DATA,
+        )
 
         return tx_hash
 

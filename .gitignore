@@ -28,3 +28,4 @@ keys.json
 ethereum_private_key.txt
 packages/__pycache__/
 __pycache__/
+.idea

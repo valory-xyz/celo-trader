@@ -84,6 +84,7 @@ class HttpHandler(BaseHttpHandler):
     """This implements the echo handler."""
 
     SUPPORTED_PROTOCOL = HttpMessage.protocol_id
+    HANDLER_NAME = "Celo trader HttpHandler"
 
     def setup(self) -> None:
         """Implement the setup."""
@@ -136,7 +137,7 @@ class HttpHandler(BaseHttpHandler):
         # Check base url
         if not re.match(self.handler_url_regex, url):
             self.context.logger.info(
-                f"The url {url} does not match the DynamicNFT HttpHandler's pattern"
+                f"The url {url} does not match the {self.HANDLER_NAME}'s pattern"
             )
             return None, {}
 
@@ -153,7 +154,7 @@ class HttpHandler(BaseHttpHandler):
 
         # No route found
         self.context.logger.info(
-            f"The message [{method}] {url} is intended for the DynamicNFT HttpHandler but did not match any valid pattern"
+            f"The message [{method}] {url} is intended for the {self.HANDLER_NAME} but did not match any valid pattern"
         )
         return self._handle_bad_request, {}
 
@@ -203,7 +204,7 @@ class HttpHandler(BaseHttpHandler):
         handler(http_msg, http_dialogue, **kwargs)
 
     def _handle_bad_request(
-        self, http_msg: HttpMessage, http_dialogue: HttpDialogue
+        self, http_msg: HttpMessage, http_dialogue: HttpDialogue, msg: str = ""
     ) -> None:
         """
         Handle a Http bad request.
@@ -218,7 +219,7 @@ class HttpHandler(BaseHttpHandler):
             status_code=BAD_REQUEST_CODE,
             status_text="Bad request",
             headers=http_msg.headers,
-            body=b"",
+            body=msg.encode(),
         )
 
         # Send response
@@ -297,7 +298,12 @@ class HttpHandler(BaseHttpHandler):
     def _handle_post_request(
         self, http_msg: HttpMessage, http_dialogue: HttpDialogue
     ) -> None:
-        request = json.loads(http_msg.body)
+        try:
+            request = json.loads(http_msg.body)
+        except json.decoder.JSONDecodeError:
+            msg = f"Received invalid JSON request: {http_msg.body}."
+            return self._handle_bad_request(http_msg, http_dialogue, msg)
+
         self.context.logger.info(f"Received user request: {request}")
         self.context.state.user_requests.append(request)
         response_body_data = {}

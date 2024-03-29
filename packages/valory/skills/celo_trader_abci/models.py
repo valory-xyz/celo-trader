@@ -23,7 +23,7 @@ from typing import Any, List
 
 from aea.skills.base import SkillContext
 
-from packages.valory.skills.abstract_round_abci.models import ApiSpecs, BaseParams
+from packages.valory.skills.abstract_round_abci.models import BaseParams
 from packages.valory.skills.abstract_round_abci.models import (
     BenchmarkTool as BaseBenchmarkTool,
 )
@@ -49,14 +49,11 @@ Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool
 
 
-class RandomnessApi(ApiSpecs):
-    """A model that wraps ApiSpecs for randomness api specifications."""
-
-
 class Params(BaseParams):
     """Parameters."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters object."""
         self.service_endpoint_base = self._ensure("service_endpoint_base", kwargs, str)
+        self.celo_tool_name: str = self._ensure("tool", kwargs, str)
         super().__init__(*args, **kwargs)

@@ -20,9 +20,8 @@
 """This package contains the rounds of CeloTraderAbciApp."""
 
 import json
-from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple, cast
+from typing import Dict, FrozenSet, Optional, Set, Tuple
 
 from packages.valory.skills.abstract_round_abci.base import (
     AbciApp,
@@ -38,6 +37,9 @@ from packages.valory.skills.celo_trader_abci.payloads import (
     DecisionMakingPayload,
     PostTxDecisionMakingPayload,
 )
+from packages.valory.skills.mech_interact_abci.states.base import (
+    SynchronizedData as MechSyncedData,
+)
 
 
 class Event(Enum):
@@ -51,41 +53,7 @@ class Event(Enum):
     ROUND_TIMEOUT = "round_timeout"
 
 
-@dataclass
-class MechMetadata:
-    """A Mech's metadata."""
-
-    prompt: str
-    tool: str
-    nonce: str
-
-
-@dataclass
-class MechRequest:
-    """A Mech's request."""
-
-    data: str = ""
-    requestId: int = 0
-
-
-@dataclass
-class MechInteractionResponse(MechRequest):
-    """A structure for the response of a mech interaction task."""
-
-    nonce: str = ""
-    result: Optional[str] = None
-    error: str = "Unknown"
-
-    def retries_exceeded(self) -> None:
-        """Set an incorrect format response."""
-        self.error = "Retries were exceeded while trying to get the mech's response."
-
-    def incorrect_format(self, res: Any) -> None:
-        """Set an incorrect format response."""
-        self.error = f"The response's format was unexpected: {res}"
-
-
-class SynchronizedData(BaseSynchronizedData):
+class SynchronizedData(MechSyncedData):
     """
     Class to represent the synchronized data.
 
@@ -93,28 +61,9 @@ class SynchronizedData(BaseSynchronizedData):
     """
 
     @property
-    def mech_requests(self) -> List[MechMetadata]:
-        """Get the mech requests."""
-        serialized = self.db.get("mech_requests", "[]")
-        requests = json.loads(serialized)  # type: ignore
-        return [MechMetadata(**metadata_item) for metadata_item in requests]
-
-    @property
-    def mech_responses(self) -> List[MechInteractionResponse]:
-        """Get the mech responses."""
-        serialized = self.db.get("mech_responses", "[]")
-        responses = json.loads(serialized)  # type: ignore
-        return [MechInteractionResponse(**response_item) for response_item in responses]
-
-    @property
-    def most_voted_tx_hash(self) -> str:
-        """Get the most_voted_tx_hash."""
-        return cast(str, self.db.get_strict("most_voted_tx_hash"))
-
-    @property
     def post_tx_event(self) -> Optional[str]:
         """Get the post_tx_event."""
-        return cast(str, self.db.get("post_tx_event", None))
+        return self.db.get("post_tx_event", None)
 
 
 class DecisionMakingRound(CollectSameUntilThresholdRound):
@@ -130,7 +79,7 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
             event = Event(payload["event"])
 
             updates = {
-                "mech_requests": payload["mech_requests"],
+                "mech_requests": json.dumps(payload["mech_requests"], sort_keys=True),
                 "mech_responses": json.dumps(payload["mech_responses"], sort_keys=True),
                 "most_voted_tx_hash": payload["tx_hash"],
                 "post_tx_event": payload["post_tx_event"],
@@ -138,10 +87,7 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
 
             synchronized_data = self.synchronized_data.update(
                 synchronized_data_class=self.synchronized_data_class,
-                **{
-                    get_name(getattr(SynchronizedData, k)): v
-                    for k, v in updates.items()
-                },
+                **updates,
             )
 
             return synchronized_data, event
@@ -234,7 +180,9 @@ class CeloTraderAbciApp(AbciApp[Event]):
     }
     db_post_conditions: Dict[AppState, Set[str]] = {
         FinishedDecisionMakingMechRound: set(),
-        FinishedDecisionMakingSettleRound: {"most_voted_tx_hash"},
+        FinishedDecisionMakingSettleRound: {
+            get_name(SynchronizedData.most_voted_tx_hash)
+        },
         FinishedPostTxDecisionMakingMechRound: set(),
         FinishedDecisionMakingResetRound: set(),
     }

@@ -7,21 +7,25 @@ license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
   __init__.py: bafybeibpav2gjxb5zexmnc4roj3n52u3ua2nuusqhrctergnztbfcbpk7y
-  behaviours.py: bafybeifylz56vy4pop3coatjmshpj2xd56ybnvyatfcagzngdinxtirio4
+  behaviours.py: bafybeifya2lsig7u6h7ekuobral7lhck2yqe6yodtduynj2dumwurgnvzm
   dialogues.py: bafybeif2gaejo5wyypbkstz5pgfhkutaazabubix6zraqp3oi3677a5ocq
   fsm_specification.yaml: bafybeibuved2gcvkmdb72gthyiruey7mtbc2bcnxdyhhhw4ofw7u5tgyuy
-  handlers.py: bafybeiekbrx6fjflsz73wdxb5atkodbdnhkxumenjxbpmirigggibmrd4a
-  models.py: bafybeig4lop272adhudz7isvgzookkvwqncqjii6iklcwgf7yhdzw5a5ou
+  handlers.py: bafybeia7iem37ac3lvegx5g3ygcvsk6oblaolcadbodntsdu3tntwvwj54
+  models.py: bafybeiaxw4i5ly2exoavb6ucdl2o3x4hjzmldw54amw6n63w2wmrju2suy
   payloads.py: bafybeihqvfqhkxhcptgwaezvmyyza32wfgiqpirztr75wywttqr577kw6a
-  rounds.py: bafybeiel4knhglkmagz2l2bwp2q275lcuwerr66t4hjplppsynr3bs32nq
+  rounds.py: bafybeiervg3simdfsuqmxyehq2se5mhied6gjdm7vwyxdapxj3bvagu24y
 fingerprint_ignore_patterns: []
 connections:
 - valory/http_server:0.22.0:bafybeihpgu56ovmq4npazdbh6y6ru5i7zuv6wvdglpxavsckyih56smu7m
-contracts: []
+contracts:
+- valory/gnosis_safe:0.1.0:bafybeif3n23srpc7kouvry6c5h3qmd4h63vtd3gg7el2upjm6xac6mligi
 protocols:
+- valory/contract_api:1.0.0:bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i
 - valory/http:1.0.0:bafybeifugzl63kfdmwrxwphrnrhj7bn6iruxieme3a4ntzejf6kmtuwmae
 skills:
 - valory/abstract_round_abci:0.1.0:bafybeic2emnylfmdtidobgdsxa4tgdelreeimtglqzrmic6cumhpsbfzhe
+- valory/transaction_settlement_abci:0.1.0:bafybeifhuemoavm6hf4vypg2sl7kng3iv4ipxgpk3itbh5hp73lworpuwq
+- valory/mech_interact_abci:0.1.0:bafybeigilca6rfqu4qw7yhz5lnhzgymj5cabtusx5hjndt7w7kulkn7cga
 behaviours:
   main:
     args: {}
@@ -122,6 +126,7 @@ models:
       tx_timeout: 10.0
       validate_timeout: 1205
       service_endpoint_base: https://celo_trader.staging.autonolas.tech/
+      tool: insert_mech_tool_name
     class_name: Params
   requests:
     args: {}
