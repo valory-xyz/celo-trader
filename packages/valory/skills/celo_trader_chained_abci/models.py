@@ -23,10 +23,8 @@ from packages.valory.skills.abstract_round_abci.models import (
     BenchmarkTool as BaseBenchmarkTool,
 )
 from packages.valory.skills.abstract_round_abci.models import Requests as BaseRequests
+from packages.valory.skills.abstract_round_abci.tests.data.dummy_abci.models import RandomnessApi as BaseRandomnessApi
 from packages.valory.skills.celo_trader_abci.models import Params as CeloTraderParams
-from packages.valory.skills.celo_trader_abci.models import (
-    RandomnessApi as CeloTraderRandomnessApi,
-)
 from packages.valory.skills.celo_trader_abci.models import (
     SharedState as BaseSharedState,
 )
@@ -35,7 +33,7 @@ from packages.valory.skills.celo_trader_chained_abci.composition import (
     CeloTraderChainedSkillAbciApp,
 )
 from packages.valory.skills.mech_interact_abci.models import (
-    Params as MechInteractAbciParams,
+    Params as MechInteractAbciParams, MechResponseSpecs as MechInteractMechResponseSpecs,
 )
 from packages.valory.skills.reset_pause_abci.rounds import Event as ResetPauseEvent
 from packages.valory.skills.termination_abci.models import TerminationParams
@@ -43,7 +41,9 @@ from packages.valory.skills.termination_abci.models import TerminationParams
 
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool
-RandomnessApi = CeloTraderRandomnessApi
+
+RandomnessApi = BaseRandomnessApi
+MechResponseSpecs = MechInteractMechResponseSpecs
 
 MechInteractParams = MechInteractAbciParams
 
