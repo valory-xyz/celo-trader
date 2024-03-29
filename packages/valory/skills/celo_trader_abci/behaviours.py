@@ -120,7 +120,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # If there are user requests, we need to send mech requests
         n_pending = len(self.local_state.user_requests)
         if n_pending:
-            self.context.logger.info(f"{n_pending} pending user requests.")
+            self.context.logger.info(f"{n_pending} pending user request(s).")
             data["event"] = Event.MECH.value
             data["mech_requests"] = self.get_mech_requests()
             # go back to mech response after settling
@@ -182,8 +182,8 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         if response_msg.performative != ContractApiMessage.Performative.STATE:
             self.context.logger.error(
                 "Couldn't get safe tx hash. Expected response performative "
-                f"{ContractApiMessage.Performative.STATE.value}, "  # type: ignore
-                f"received {response_msg.performative.value}: {response_msg}."
+                f"{ContractApiMessage.Performative.STATE.value!r}, "  # type: ignore
+                f"received {response_msg.performative.value!r}: {response_msg}."
             )
             return None
 
