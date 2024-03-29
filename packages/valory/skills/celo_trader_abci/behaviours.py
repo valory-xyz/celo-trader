@@ -23,7 +23,7 @@ import json
 import uuid
 from abc import ABC
 from dataclasses import asdict
-from typing import Any, Dict, Generator, Optional, Set, Type, cast, List
+from typing import Any, Dict, Generator, List, Optional, Set, Type, cast
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 from packages.valory.protocols.contract_api import ContractApiMessage
