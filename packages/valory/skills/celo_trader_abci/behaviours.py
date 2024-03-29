@@ -23,7 +23,7 @@ import json
 import uuid
 from abc import ABC
 from dataclasses import asdict
-from typing import Any, Dict, Generator, Optional, Set, Type, cast
+from typing import Any, Dict, Generator, Optional, Set, Type, cast, List
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 from packages.valory.protocols.contract_api import ContractApiMessage
@@ -111,8 +111,8 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # Default payload data which clears everything before resetting
         data = dict(
             event=Event.DONE.value,
-            mech_requests="[]",
-            mech_responses="[]",
+            mech_requests=[],
+            mech_responses=[],
             tx_hash="",
             post_tx_event="",
         )
@@ -132,7 +132,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         if mech_responses:
             mech_response = mech_responses.pop(0)  # remove the response to be processed
             tx_hash = self.process_next_mech_response(mech_response)
-            data["mech_responses"] = json.dumps(mech_responses, sort_keys=True)
+            data["mech_responses"] = [asdict(response) for response in mech_responses]
 
             # If the mech tool has decided not to trade, we skip trading.
             if not tx_hash:
@@ -147,7 +147,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # Reset
         return data
 
-    def get_mech_requests(self):
+    def get_mech_requests(self) -> List[Dict[str, str]]:
         """Get mech requests"""
 
         mech_requests = [
@@ -165,7 +165,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         # TODO: for multi-agent, this has to be done after this round
         self.local_state.user_requests = []
 
-        return json.dumps(mech_requests)
+        return mech_requests
 
     def _build_safe_tx_hash(self, **kwargs: Any) -> Optional[str]:
         """Prepares and returns the safe tx hash for a multisend tx."""

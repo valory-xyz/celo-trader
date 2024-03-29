@@ -79,7 +79,7 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
             event = Event(payload["event"])
 
             updates = {
-                "mech_requests": payload["mech_requests"],
+                "mech_requests": json.dumps(payload["mech_requests"], sort_keys=True),
                 "mech_responses": json.dumps(payload["mech_responses"], sort_keys=True),
                 "most_voted_tx_hash": payload["tx_hash"],
                 "post_tx_event": payload["post_tx_event"],
