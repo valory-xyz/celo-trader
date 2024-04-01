@@ -108,4 +108,8 @@ all-linters:
 	tox -e pylint
 	tox -e mypy
 
+.PHONY: mech_request
+mech_request:
+	curl -X POST http://localhost:8000/request -H "Content-Type: application/json" -d "{}" | jq
+
 v := $(shell pip -V | grep virtualenvs)

@@ -2,6 +2,12 @@
 
 REPO_PATH=$PWD
 
+# Remove previous service build
+if test -d celo_trader; then
+  echo "Removing previous service build"
+  sudo rm -r celo_trader
+fi
+
 # Push packages and fetch service
 make clean
 
