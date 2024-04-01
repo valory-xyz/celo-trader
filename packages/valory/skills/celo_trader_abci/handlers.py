@@ -299,6 +299,8 @@ class HttpHandler(BaseHttpHandler):
         self, http_msg: HttpMessage, http_dialogue: HttpDialogue
     ) -> None:
         try:
+            # TODO check whether the request needs to be a pure `str` instead,
+            #  since this is going to be the prompt given to the mech tool
             request = json.loads(http_msg.body)
         except json.decoder.JSONDecodeError:
             msg = f"Received invalid JSON request: {http_msg.body}."
