@@ -59,7 +59,7 @@ from packages.valory.skills.transaction_settlement_abci.rounds import TX_HASH_LE
 # more info here: https://safe-docs.dev.gnosisdev.com/safe/docs/contracts_tx_execution/
 SAFE_GAS = 0
 VALUE_KEY = "value"
-TO_ADDRESS_KEY = "value"
+TO_ADDRESS_KEY = "to_address"
 EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
 # the current POC only supports transfer transactions, therefore, the transaction data will always be empty
 TX_DATA = b"0x"
