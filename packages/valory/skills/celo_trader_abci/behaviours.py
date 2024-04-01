@@ -58,8 +58,9 @@ from packages.valory.skills.transaction_settlement_abci.rounds import TX_HASH_LE
 # which is what we want in most cases
 # more info here: https://safe-docs.dev.gnosisdev.com/safe/docs/contracts_tx_execution/
 SAFE_GAS = 0
+GNOSIS_CHAIN_ID = "gnosis"
 VALUE_KEY = "value"
-TO_ADDRESS_KEY = "value"
+TO_ADDRESS_KEY = "to_address"
 EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
 # the current POC only supports transfer transactions, therefore, the transaction data will always be empty
 TX_DATA = b"0x"
@@ -93,7 +94,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
-            payload_data = self.get_payload_data()
+            payload_data = yield from self.get_payload_data()
             payload = DecisionMakingPayload(
                 sender=self.context.agent_address,
                 content=json.dumps(payload_data, sort_keys=True),
@@ -105,7 +106,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
 
         self.set_done()
 
-    def get_payload_data(self) -> Dict:
+    def get_payload_data(self) -> Generator[None, None, Dict]:
         """Get the payload"""
 
         # Default payload data which clears everything before resetting
@@ -115,6 +116,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             mech_responses=[],
             tx_hash="",
             post_tx_event="",
+            chain_id=GNOSIS_CHAIN_ID,
         )
 
         # If there are user requests, we need to send mech requests
@@ -131,7 +133,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         mech_responses = self.synchronized_data.mech_responses
         if mech_responses:
             mech_response = mech_responses.pop(0)  # remove the response to be processed
-            tx_hash = self.process_next_mech_response(mech_response)
+            tx_hash = yield from self.process_next_mech_response(mech_response)
             data["mech_responses"] = [asdict(response) for response in mech_responses]
 
             # If the mech tool has decided not to trade, we skip trading.
@@ -167,7 +169,9 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
 
         return mech_requests
 
-    def _build_safe_tx_hash(self, **kwargs: Any) -> Optional[str]:
+    def _build_safe_tx_hash(
+        self, **kwargs: Any
+    ) -> Generator[None, None, Optional[str]]:
         """Prepares and returns the safe tx hash for a multisend tx."""
         response_msg = yield from self.get_contract_api_response(
             performative=ContractApiMessage.Performative.GET_STATE,  # type: ignore
@@ -176,6 +180,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             contract_callable="get_raw_safe_transaction_hash",
             data=TX_DATA,
             safe_tx_gas=SAFE_GAS,
+            chain_id=GNOSIS_CHAIN_ID,
             **kwargs,
         )
 
@@ -200,7 +205,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
 
     def process_next_mech_response(
         self, mech_response: MechInteractionResponse
-    ) -> Optional[str]:
+    ) -> Generator[None, None, Optional[str]]:
         """Get the call data from the mech response."""
 
         encoded_response = mech_response.result
@@ -226,7 +231,11 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             )
             return None
 
-        safe_tx_hash = self._build_safe_tx_hash(**call_data)
+        safe_tx_hash = yield from self._build_safe_tx_hash(**call_data)
+        if safe_tx_hash is None:
+            self.context.logger.error("Could not build the safe transaction's hash.")
+            return None
+
         tx_hash = hash_payload_to_hex(
             safe_tx_hash,
             call_data[VALUE_KEY],

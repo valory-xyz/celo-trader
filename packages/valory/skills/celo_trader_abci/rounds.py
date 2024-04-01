@@ -83,6 +83,7 @@ class DecisionMakingRound(CollectSameUntilThresholdRound):
                 "mech_responses": json.dumps(payload["mech_responses"], sort_keys=True),
                 "most_voted_tx_hash": payload["tx_hash"],
                 "post_tx_event": payload["post_tx_event"],
+                "chain_id": payload["chain_id"],
             }
 
             synchronized_data = self.synchronized_data.update(
