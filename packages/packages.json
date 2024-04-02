@@ -3,7 +3,7 @@
         "skill/valory/celo_trader_abci/0.1.0": "bafybeih5gzfu44xmxjgni6dontao6rfzgye5ffwvt6ya3gusa77t4zm4xm",
         "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeie64r5okwd7kawo4lk4nxezs44qjlhddap3f42thv5r6vbperpjua",
         "agent/valory/celo_trader/0.1.0": "bafybeid5ynmelivhxnrjhba7xakcvivwksxnu247snk4ljd72jdefg57zm",
-        "service/valory/celo_trader/0.1.0": "bafybeie5zrwsws5uwsjn7rvv5k3ceeqemu77442rhlynq5j5kbzjytut5e"
+        "service/valory/celo_trader/0.1.0": "bafybeihwqm4mthc7czws4xhfkwop6hcuufik32bpycad5fpgzrd2cob32q"
     },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
