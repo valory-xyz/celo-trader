@@ -1,18 +1,19 @@
 # Security Policy
 
-This document outlines security procedures and general policies for the `dev-template` project.
+This document outlines security procedures and general policies for the `Celo-trader` project.
 
 ## Supported Versions
 
-The following table shows which versions of `dev-template` are currently being supported with security updates.
+The following table shows which versions of `Celo-trader` are currently being supported with security updates.
 
-| Version   | Supported          |
-| --------- | ------------------ |
-| `N/A`     | :white_check_mark: |
+| Version    | Supported          |
+|------------|--------------------|
+| `v0.1.0`   | :white_check_mark: |
+| `< v0.1.0` | :x:                |
 
 ## Reporting a Vulnerability
 
-The `dev-template` team and community take all security bugs in `dev-template` seriously. Thank you for improving the security of `dev-template`. We appreciate your efforts and responsible disclosure and will make every effort to acknowledge your contributions.
+The `Celo-trader` team and community take all security bugs in `Celo-trader` seriously. Thank you for improving the security of `Celo-trader`. We appreciate your efforts and responsible disclosure and will make every effort to acknowledge your contributions.
 
 Report security bugs by emailing `info@valory.xyz`.
 
