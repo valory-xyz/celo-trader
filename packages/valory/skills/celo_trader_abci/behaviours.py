@@ -64,6 +64,7 @@ TO_ADDRESS_KEY = "to_address"
 EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
 # the current POC only supports transfer transactions, therefore, the transaction data will always be empty
 TX_DATA = b"0x"
+MAX_TRANSFER_VALUE_WEI = 1000
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
@@ -157,7 +158,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
                 MechMetadata(
                     nonce=str(uuid.uuid4()),
                     tool=self.params.celo_tool_name,
-                    prompt=request,
+                    prompt=request["prompt"],
                 )
             )
             for request in self.local_state.user_requests
@@ -220,6 +221,13 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
         except json.decoder.JSONDecodeError:
             self.context.logger.error(
                 f"Could not decode the mech's {encoded_response=}."
+            )
+            return None
+
+        # Security measure to limit the transaction amount
+        if MAX_TRANSFER_VALUE_WEI and call_data[VALUE_KEY] > MAX_TRANSFER_VALUE_WEI:
+            self.context.logger.error(
+                f"Value is too high: {call_data[VALUE_KEY]} > {MAX_TRANSFER_VALUE_WEI}"
             )
             return None
 

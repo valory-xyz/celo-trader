@@ -108,8 +108,8 @@ all-linters:
 	tox -e pylint
 	tox -e mypy
 
-.PHONY: mech_request
-mech_request:
-	curl -X POST http://localhost:8000/request -H "Content-Type: application/json" -d "{}" | jq
+.PHONY: transfer_request
+transfer_request:
+	curl -X POST http://localhost:8000/request -H "Content-Type: application/json" -d '{"prompt":"Transfer 1 wei to 0x8D7102ce2d35a409535285252599c149FBeABB73"}' | jq
 
 v := $(shell pip -V | grep virtualenvs)
