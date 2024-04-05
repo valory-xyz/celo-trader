@@ -1,6 +1,6 @@
-# Dev-template
+# Celo trader
 
-A template for development with the open-autonomy framework. Find the documentation [here](https://docs.autonolas.network).
+An Olas agent
 
 ## System requirements
 
