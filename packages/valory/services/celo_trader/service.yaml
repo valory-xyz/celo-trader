@@ -95,7 +95,7 @@ extra:
         openai_calls_allowed_in_window: ${OPENAI_CALLS_ALLOWED_IN_WINDOW:int:100}
         service_endpoint_base: ${SERVICE_ENDPOINT_BASE:str:https://celo_trader.autonolas.tech/}
         multisend_batch_size: ${MULTISEND_BATCH_SIZE:int:5}
-        mech_contract_address: ${MECH_CONTRACT_ADDRESS:str:0x77af31de935740567cf4ff1986d04b2c964a786a}
+        mech_contract_address: ${MECH_CONTRACT_ADDRESS:str:0x230eD015735c0D01EA0AaD2786Ed6Bd3C6e75912}
         ipfs_address: ${IPFS_ADDRESS:str:https://gateway.autonolas.tech/ipfs/}
         default_chain_id: ${DEFAULT_CHAIN_ID:str:gnosis}
         transaction_service_url: ${TRANSACTION_SERVICE_URL:str:https://safe-transaction-mainnet.safe.global/api/v1/messages/{message_hash}/}
