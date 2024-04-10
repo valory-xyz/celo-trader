@@ -33,7 +33,7 @@ skills:
 - valory/abstract_abci:0.1.0:bafybeibvz3hi25ktgdzm25kih25o5osml62zk4kzpgmzmyrem3hzo2vtnm
 - valory/abstract_round_abci:0.1.0:bafybeic2emnylfmdtidobgdsxa4tgdelreeimtglqzrmic6cumhpsbfzhe
 - valory/celo_trader_abci:0.1.0:bafybeiafnlxbb2yyui3g4qobzxke3fheprv4msiwrnck4esb6qrkbvut54
-- valory/celo_trader_chained_abci:0.1.0:bafybeifw6mzvn2saem7yhrst6ktw2nyjqdajtqfuhnxyy55mrvb5fu2ryu
+- valory/celo_trader_chained_abci:0.1.0:bafybeiadgbnq6ohnkbbnvi5itnu7uq3kj54cah2kvg2mms7quu3rf7onpy
 - valory/mech_interact_abci:0.1.0:bafybeigilca6rfqu4qw7yhz5lnhzgymj5cabtusx5hjndt7w7kulkn7cga
 - valory/registration_abci:0.1.0:bafybeibzduasg5pahk2d2glc36wlopg54ybwcdmjqbzozt2lmkp4reqsdu
 - valory/reset_pause_abci:0.1.0:bafybeib3geaw3o35aigmb4dhplxrjlsef7hbdwrozu4akiunlgyiegshj4
