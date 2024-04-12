@@ -182,6 +182,7 @@ models:
       ipfs_address: ${str:https://gateway.autonolas.tech/ipfs/}
       service_endpoint_base: ${str:https://celo_trader.staging.autonolas.tech/}
       tool: ${str:prepare_tx}
+      mech_chain_id: ${str:gnosis}
 ---
 public_id: valory/http_server:0.22.0:bafybeicblltx7ha3ulthg7bzfccuqqyjmihhrvfeztlgrlcoxhr7kf6nbq
 type: connection
