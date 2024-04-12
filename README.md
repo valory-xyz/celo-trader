@@ -59,7 +59,7 @@ docker container run -it valory/open-autonomy-user:latest
 
     ```cp sample.env .env```
 
-2. Fill in the required environment variables in .env. Fill in the variables inside .env. You'll need a Ethereum RPC even if the service runs on Celo.
+2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo.
 
 3. Run the service:
 
