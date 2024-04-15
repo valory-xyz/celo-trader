@@ -32,9 +32,9 @@ protocols:
 skills:
 - valory/abstract_abci:0.1.0:bafybeihat4giyc4bz6zopvahcj4iw53356pbtwfn7p4d5yflwly2qhahum
 - valory/abstract_round_abci:0.1.0:bafybeih3enhagoql7kzpeyzzu2scpkif6y3ubakpralfnwxcvxexdyvy5i
-- valory/celo_trader_abci:0.1.0:bafybeidaphivyrjcryshxbwb4tbcxqgpna35eda57d45uu7roambijjmma
-- valory/celo_trader_chained_abci:0.1.0:bafybeicee5hnic6yq5mq7icifk2kyeg4laui7nrghzn3ndlbefxkpay3jq
-- valory/mech_interact_abci:0.1.0:bafybeib3aytq2a5hk6vjsak3eznuilndx4p53utdylbyhcmt6ty7kk6euq
+- valory/celo_trader_abci:0.1.0:bafybeiefvwvprt6kqbezsfjip2ypzzw3iupcoaf3yst67spev24u5so67q
+- valory/celo_trader_chained_abci:0.1.0:bafybeidio6vidq2gzz7faa556err2s5u4htsoknn7nq4turfmk5hkmawry
+- valory/mech_interact_abci:0.1.0:bafybeifnhfbavpkqsvc5uznjyntby7wswdszs3up3way2zf65itkv7663q
 - valory/registration_abci:0.1.0:bafybeiek7zcsxbucjwzgqfftafhfrocvc7q4yxllh2q44jeemsjxg3rcfm
 - valory/reset_pause_abci:0.1.0:bafybeidw4mbx3os3hmv7ley7b3g3gja7ydpitr7mxbjpwzxin2mzyt5yam
 - valory/termination_abci:0.1.0:bafybeihq6qtbwt6i53ayqym63vhjexkcppy26gguzhhjqywfmiuqghvv44
