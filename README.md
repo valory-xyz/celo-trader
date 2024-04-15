@@ -65,7 +65,11 @@ docker container run -it valory/open-autonomy-user:latest
 
     ```bash run_service.sh```
 
-4. Make a transfer request. On another terminal:
+4. Look at the service logs:
+
+    ```docker logs -f celotrader_abci_0```
+
+5. Make a transfer request. On another terminal:
 
     ```make transfer_request```
 
