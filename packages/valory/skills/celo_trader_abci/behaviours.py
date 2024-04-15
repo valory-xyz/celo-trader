@@ -58,7 +58,7 @@ from packages.valory.skills.transaction_settlement_abci.rounds import TX_HASH_LE
 # which is what we want in most cases
 # more info here: https://safe-docs.dev.gnosisdev.com/safe/docs/contracts_tx_execution/
 SAFE_GAS = 0
-GNOSIS_CHAIN_ID = "gnosis"
+CELO_CHAIN_ID = "celo"
 VALUE_KEY = "value"
 TO_ADDRESS_KEY = "to_address"
 EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
@@ -117,7 +117,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             mech_responses=[],
             tx_hash="",
             post_tx_event="",
-            chain_id=GNOSIS_CHAIN_ID,
+            chain_id=CELO_CHAIN_ID,
         )
 
         # If there are user requests, we need to send mech requests
@@ -181,7 +181,7 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             contract_callable="get_raw_safe_transaction_hash",
             data=TX_DATA,
             safe_tx_gas=SAFE_GAS,
-            chain_id=GNOSIS_CHAIN_ID,
+            chain_id=CELO_CHAIN_ID,
             **kwargs,
         )
 
