@@ -4,7 +4,7 @@ An [Olas](https://olas.network/) agent that makes transactions on the [Celo](htt
 
 ## System requirements
 
-- Python `>=3.8`
+- Python `>=3.10`
 - [Tendermint](https://docs.tendermint.com/v0.34/introduction/install.html) `==0.34.19`
 - [IPFS node](https://docs.ipfs.io/install/command-line/#official-distributions) `==0.6.0`
 - [Pip](https://pip.pypa.io/en/stable/installation/)
@@ -59,7 +59,7 @@ docker container run -it valory/open-autonomy-user:latest
 
     ```cp sample.env .env```
 
-2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo.
+2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo. These variables are: `ALL_PARTICIPANTS`, `ETHEREUM_LEDGER_RPC` and `SAFE_CONTRACT_ADDRESS`
 
 3. Run the service:
 
