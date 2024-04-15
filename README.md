@@ -50,7 +50,7 @@ docker container run -it valory/open-autonomy-user:latest
 ]
 ```
 
-2. Deploy a [Safe on Gnosis](https://app.safe.global/welcome) (it's free) and set your agent address as one of the signers.
+2. Deploy a [Safe on Celo](https://app.safe.global/welcome) (it's free) and set your agent address as one of the signers.
 
 
 ### Run the service
