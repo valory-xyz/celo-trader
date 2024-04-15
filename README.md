@@ -52,6 +52,8 @@ docker container run -it valory/open-autonomy-user:latest
 
 2. Deploy a [Safe on Celo](https://app.safe.global/welcome) and set your agent address as one of the signers.
 
+3. Fund both your agent and Safe with a small amount of Celo, i.e. $0.05 each.
+
 
 ### Run the service
 
