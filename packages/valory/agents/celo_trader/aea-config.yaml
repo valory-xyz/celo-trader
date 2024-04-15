@@ -90,10 +90,10 @@ config:
       chain_id: ${int:31337}
       poa_chain: ${bool:false}
       default_gas_price_strategy: ${str:eip1559}
-    gnosis:
+    celo:
       address: ${str:http://localhost:8545}
-      chain_id: ${int:1337}
-      poa_chain: ${bool:false}
+      chain_id: ${int:42220}
+      poa_chain: ${bool:true}
       default_gas_price_strategy: ${str:eip1559}
 ---
 public_id: valory/p2p_libp2p_client:0.1.0
@@ -182,7 +182,7 @@ models:
       ipfs_address: ${str:https://gateway.autonolas.tech/ipfs/}
       service_endpoint_base: ${str:https://celo_trader.staging.autonolas.tech/}
       tool: ${str:prepare_tx}
-      mech_chain_id: ${str:gnosis}
+      mech_chain_id: ${str:celo}
 ---
 public_id: valory/http_server:0.22.0:bafybeicblltx7ha3ulthg7bzfccuqqyjmihhrvfeztlgrlcoxhr7kf6nbq
 type: connection

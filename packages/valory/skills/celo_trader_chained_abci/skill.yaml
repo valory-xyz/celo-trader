@@ -137,7 +137,7 @@ models:
       ipfs_address: https://gateway.autonolas.tech/ipfs/
       service_endpoint_base: https://celo_trader.staging.autonolas.tech/
       tool: insert_mech_tool_name
-      mech_chain_id: gnosis
+      mech_chain_id: celo
     class_name: Params
   randomness_api:
     args:
