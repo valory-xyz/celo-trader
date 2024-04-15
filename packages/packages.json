@@ -1,9 +1,9 @@
 {
     "dev": {
-        "skill/valory/celo_trader_abci/0.1.0": "bafybeidqyex4bbnseqblg3xr644plabcvtigkk7cvvxasfb735td2doq7m",
-        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeihqd6g5ei335vjwpnoq2tcnev4n5snbtjzfpehzz6ppzny7gukm5m",
-        "agent/valory/celo_trader/0.1.0": "bafybeiakm5u35oxj4fg3s5staw7zd27peqpmxfmedbfcu4u4c6f42dqbne",
-        "service/valory/celo_trader/0.1.0": "bafybeib7agfjcsubfdyouor3qyp24ay7a5cpa3qvrf5giaot4sxjqrbafu"
+        "skill/valory/celo_trader_abci/0.1.0": "bafybeiefvwvprt6kqbezsfjip2ypzzw3iupcoaf3yst67spev24u5so67q",
+        "skill/valory/celo_trader_chained_abci/0.1.0": "bafybeidio6vidq2gzz7faa556err2s5u4htsoknn7nq4turfmk5hkmawry",
+        "agent/valory/celo_trader/0.1.0": "bafybeiewwvkxmksxwp2rzwov6sjycdvu3fbozk6dxkoqykmfvb6at6tjj4",
+        "service/valory/celo_trader/0.1.0": "bafybeicn6u47ibzj3x7k25eiwwcseb2nthzle3dwn6hvqba4hopvedbovm"
     },
     "third_party": {
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
@@ -18,7 +18,8 @@
         "contract/valory/gnosis_safe_proxy_factory/0.1.0": "bafybeib6podeifufgmawvicm3xyz3uaplbcrsptjzz4unpseh7qtcpar74",
         "contract/valory/multisend/0.1.0": "bafybeig5byt5urg2d2bsecufxe5ql7f4mezg3mekfleeh32nmuusx66p4y",
         "contract/valory/gnosis_safe/0.1.0": "bafybeibq77mgzhyb23blf2eqmia3kc6io5karedfzhntvpcebeqdzrgyqa",
-        "contract/valory/mech/0.1.0": "bafybeiejdn3rqqa7smbeiypajy63um7okteimvj6bsud3gezneycmdc6te",
+        "contract/valory/mech/0.1.0": "bafybeiejkna5d7hllaxm6avsnffxfs6n4nx2lncmjz6iodkt2xhcy3mbva",
+        "contract/valory/erc20/0.1.0": "bafybeigvftdxjgnlsoemst5d57cor36idywk7bwcfj2bjqijxdxo3xpurq",
         "connection/valory/abci/0.1.0": "bafybeiclexb6cnsog5yjz2qtvqyfnf7x5m7tpp56hblhk3pbocbvgjzhze",
         "connection/valory/http_client/0.23.0": "bafybeih5vzo22p2umhqo52nzluaanxx7kejvvpcpdsrdymckkyvmsim6gm",
         "connection/valory/ipfs/0.1.0": "bafybeihndk6hohj3yncgrye5pw7b7w2kztj3avby5u5mfk2fpjh7hqphii",
@@ -31,6 +32,6 @@
         "skill/valory/abstract_round_abci/0.1.0": "bafybeih3enhagoql7kzpeyzzu2scpkif6y3ubakpralfnwxcvxexdyvy5i",
         "skill/valory/termination_abci/0.1.0": "bafybeihq6qtbwt6i53ayqym63vhjexkcppy26gguzhhjqywfmiuqghvv44",
         "skill/valory/transaction_settlement_abci/0.1.0": "bafybeigtzlk4uakmd54rxnznorcrstsr52kta474lgrnvx5ovr546vj7sq",
-        "skill/valory/mech_interact_abci/0.1.0": "bafybeidxignwgujlkhw5hbek7xw2uz5nrd3h2xx7sj5zor263dgh4fm3p4"
+        "skill/valory/mech_interact_abci/0.1.0": "bafybeifnhfbavpkqsvc5uznjyntby7wswdszs3up3way2zf65itkv7663q"
     }
 }
