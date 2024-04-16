@@ -11,6 +11,7 @@ An [Olas](https://olas.network/) agent that makes transactions on the [Celo](htt
 - [Poetry](https://python-poetry.org/)
 - [Docker Engine](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- [Set Docker permissions so you can run containers as non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
 
 Alternatively, you can fetch this docker image with the relevant requirements satisfied:
 
