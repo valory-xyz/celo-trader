@@ -32,8 +32,8 @@ protocols:
 skills:
 - valory/abstract_abci:0.1.0:bafybeiedikuvfpdx7xhyrxcpp6ywi2d6qf6uqvlwmhgcal7qhw5duicvym
 - valory/abstract_round_abci:0.1.0:bafybeia7msuvsouwcky263k6lup5hwcj73pka4pepkgyii6sya2wfawqvy
-- valory/celo_trader_abci:0.1.0:bafybeigqfhy74emop4y5bmwz3bnvekye3vrkabeqnihxaarfe74nxtqnii
-- valory/celo_trader_chained_abci:0.1.0:bafybeifo62u463ochn7fexzxbh7k2hnfqrz5isastba232t3pcnfq7blke
+- valory/celo_trader_abci:0.1.0:bafybeihehruo3wwprbcjijkaygyovza7fr4aa3kqu5gij2vvjeor6x37oi
+- valory/celo_trader_chained_abci:0.1.0:bafybeieex6m24cch4tiiqukhxxkcoi3aj54k5dkqunt3ftahknjlninl7q
 - valory/mech_interact_abci:0.1.0:bafybeiecxnzn6mibwkht7vtv6uoa7bpd3wqhtyzd7o3jjvwxpukddon3le
 - valory/registration_abci:0.1.0:bafybeihwkqc6klqrk247esh4cumfphosx3yadullxhmrrkovzg2rward5y
 - valory/reset_pause_abci:0.1.0:bafybeibd5divbbng3klkxlkzfwmwdc7imobcymfx57lf3owbyf7we7xdem
