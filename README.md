@@ -49,14 +49,14 @@ docker container run -it valory/open-autonomy-user:latest
 
 1. Prepare a keys.json file containing wallet address and the private key for each of the agents. To create this file, either generate a new one with `autonomy generate-key ethereum -n 1` or export a existing one using Metamask and follow the following format:
 
-```
-[
-    {
-        "address": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
-        "private_key": "0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a"
-    }
-]
-```
+    ```
+    [
+        {
+            "address": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+            "private_key": "0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a"
+        }
+    ]
+    ```
 
 2. Deploy a [Safe on Celo](https://app.safe.global/welcome) and set your agent address as one of the signers.
 
