@@ -65,7 +65,7 @@ docker container run -it valory/open-autonomy-user:latest
 
     ```cp sample.env .env```
 
-2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo. These variables are: `ALL_PARTICIPANTS`, `ETHEREUM_LEDGER_RPC` and `SAFE_CONTRACT_ADDRESS`
+2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo. These variables are: `ALL_PARTICIPANTS`, `ETHEREUM_LEDGER_RPC` and `SAFE_CONTRACT_ADDRESS`. You can also modify `MAX_TRANSFER_VALUE_WEI`, which is a security measure to set the max amount of wei the agent should be able to send. This is a stopgap solution for hypothetical situations where the LLM malfunctions and specifies big transfer values.
 
 3. Run the service:
 
