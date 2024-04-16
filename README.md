@@ -71,15 +71,11 @@ docker container run -it valory/open-autonomy-user:latest
 
     ```bash run_service.sh```
 
-4. Look at the service logs:
+4. Look at the service logs (on another terminal):
 
     ```docker logs -f celotrader_abci_0```
 
-5. Make a transfer request. On another terminal:
-
-    ```make transfer_request```
-
-    or make a custom transfer request:
+5. Make a transfer request:
 
     ```curl -X POST http://localhost:8000/request -H "Content-Type: application/json" -d '{"prompt":"Transfer 1 wei to 0x8D7102ce2d35a409535285252599c149FBeABB73"}'```
 
