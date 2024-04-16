@@ -43,7 +43,7 @@ docker container run -it valory/open-autonomy-user:latest
 
 ### Prepare the data
 
-1. Prepare a keys.json file containing wallet address and the private key for each of the agents. This is an example:
+1. Prepare a keys.json file containing wallet address and the private key for each of the agents. To create this file, either generate a new one with `autonomy generate-key ethereum -n 1` or export a existing one using Metamask and follow the following format:
 
 ```
 [
@@ -56,7 +56,7 @@ docker container run -it valory/open-autonomy-user:latest
 
 2. Deploy a [Safe on Celo](https://app.safe.global/welcome) and set your agent address as one of the signers.
 
-3. Fund both your agent and Safe with a small amount of Celo, i.e. $0.05 each.
+3. Fund both your agent and Safe with a small amount of CELO, i.e. $0.05 each.
 
 
 ### Run the service
