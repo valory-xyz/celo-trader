@@ -31,7 +31,11 @@ docker container run -it valory/open-autonomy-user:latest
 
 2. Create the virtual environment:
 
-    ```poetry shell && poetry install```
+    ```
+    cd celo-trader
+    poetry shell
+    poetry install
+    ```
 
 3. Sync packages:
 
