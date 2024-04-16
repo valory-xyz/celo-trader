@@ -56,4 +56,7 @@ class Params(BaseParams):
         """Initialize the parameters object."""
         self.service_endpoint_base = self._ensure("service_endpoint_base", kwargs, str)
         self.celo_tool_name: str = self._ensure("tool", kwargs, str)
+        self.max_transfer_value_wei: int = self._ensure(
+            "max_transfer_value_wei", kwargs, int
+        )
         super().__init__(*args, **kwargs)

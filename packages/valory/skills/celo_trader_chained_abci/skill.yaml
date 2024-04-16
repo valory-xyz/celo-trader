@@ -138,6 +138,7 @@ models:
       service_endpoint_base: https://celo_trader.staging.autonolas.tech/
       tool: insert_mech_tool_name
       mech_chain_id: celo
+      max_transfer_value_wei: 1000000000000000000
     class_name: Params
   randomness_api:
     args:

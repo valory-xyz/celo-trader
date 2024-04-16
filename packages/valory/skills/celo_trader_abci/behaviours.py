@@ -64,7 +64,6 @@ TO_ADDRESS_KEY = "to_address"
 EXPECTED_CALL_DATA = frozenset({VALUE_KEY, TO_ADDRESS_KEY})
 # the current POC only supports transfer transactions, therefore, the transaction data will always be empty
 TX_DATA = b"0x"
-MAX_TRANSFER_VALUE_WEI = 1000
 
 
 class CeloTraderBaseBehaviour(BaseBehaviour, ABC):
@@ -225,9 +224,10 @@ class DecisionMakingBehaviour(CeloTraderBaseBehaviour):
             return None
 
         # Security measure to limit the transaction amount
-        if MAX_TRANSFER_VALUE_WEI and call_data[VALUE_KEY] > MAX_TRANSFER_VALUE_WEI:
+        max_transfer_value_wei = self.params.max_transfer_value_wei
+        if max_transfer_value_wei and call_data[VALUE_KEY] > max_transfer_value_wei:
             self.context.logger.error(
-                f"Value is too high: {call_data[VALUE_KEY]} > {MAX_TRANSFER_VALUE_WEI}"
+                f"Transfer value is too high. Transfer skipped. Please adjust your max_transfer_value_wei parameter: {call_data[VALUE_KEY]} > {max_transfer_value_wei}"
             )
             return None
 
