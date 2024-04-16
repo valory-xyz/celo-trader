@@ -74,19 +74,25 @@ docker container run -it valory/open-autonomy-user:latest
 
 2. Fill in the required environment variables in .env. You'll need a Ethereum RPC even if the service runs on Celo. These variables are: `ALL_PARTICIPANTS`, `ETHEREUM_LEDGER_RPC` and `SAFE_CONTRACT_ADDRESS`. You can also modify `MAX_TRANSFER_VALUE_WEI`, which is a security measure to set the max amount of wei the agent should be able to send. This is a stopgap solution for hypothetical situations where the LLM malfunctions and specifies big transfer values.
 
-3. Run the service:
+3. Check that Docker is running:
+
+    ```
+    docker
+    ```
+
+4. Run the service:
 
     ```
     bash run_service.sh
     ```
 
-4. Look at the service logs (on another terminal):
+5. Look at the service logs (on another terminal):
 
     ```
     docker logs -f celotrader_abci_0
     ```
 
-5. Make a transfer request, for example to a specific address (use your own destination address):
+6. Make a transfer request, for example to a specific address (use your own destination address):
 
     ```
     curl -X POST http://localhost:8000/request -H "Content-Type: application/json" -d '{"prompt":"Transfer 1 wei to 0x8D7102ce2d35a409535285252599c149FBeABB73"}'
