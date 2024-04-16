@@ -41,7 +41,9 @@ docker container run -it valory/open-autonomy-user:latest
 
 3. Sync packages:
 
-    ```autonomy packages sync --update-packages```
+    ```
+    autonomy packages sync --update-packages
+    ```
 
 ### Prepare the data
 
